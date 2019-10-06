@@ -249,6 +249,7 @@
             this.Text = "Formulario de Ventas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SalesForm_FormClosing);
             this.Load += new System.EventHandler(this.SalesForm_Load);
+            this.Shown += new System.EventHandler(this.SalesForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetailDataGrid)).EndInit();
             this.ResumeLayout(false);

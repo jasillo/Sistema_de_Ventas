@@ -191,17 +191,70 @@ namespace Sistema_de_Ventas
             }
             catch (Exception ex)
             {
-                Console.WriteLine("error:" + ex.ToString());
                 return false;
             }
             
             return true;
         }
 
-        public bool sale()
+        public int insertSale(int amount, string total)
         {
-            return true;
+            try
+            {
+                string a = amount.ToString();
+                string t = total.Replace(",", ".");
+                DateTime today = DateTime.Today;
+                String query = "insert into dbo.sale output INSERTED.ID values (NULL," + a + "," + t + ",'" + today.ToString() + "')";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                int res = (int)comando.ExecuteScalar();
+                return res;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
-        
+
+        public bool insertDetailSale(int id_sale, string id_product, string product_name, string price, string amount, string total)
+        {
+            try
+            {
+                string id_s = id_sale.ToString();
+                string p = price.Replace(",", ".");
+                string a = amount.Replace(",", ".");
+                string t = total.Replace(",", ".");
+                String query = "insert into dbo.detail values (" + id_s + "," + id_product + ",'" + product_name + "'," + p + "," + a + "," + t + ")";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public bool reduceInventory(string id_product, string amount)
+        {
+            try
+            {
+                String query = "select amount from dbo.product where id=" + id_product;
+                SqlCommand comando = new SqlCommand(query, conDB);
+                float current = float.Parse(comando.ExecuteScalar().ToString());
+                float a = float.Parse(amount);
+                string new_amount = (current - a).ToString().Replace(",", ".");
+                query = "update dbo.product set amount=" + new_amount + " where id=" + id_product;
+                SqlCommand comando2 = new SqlCommand(query, conDB);
+                comando2.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
     }
 }

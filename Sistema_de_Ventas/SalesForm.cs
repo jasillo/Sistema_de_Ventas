@@ -23,6 +23,11 @@ namespace Sistema_de_Ventas
             InitializeComponent();
         }
 
+        private void SalesForm_Shown(object sender, EventArgs e)
+        {
+            filterTextBox.Focus();
+        }
+
         private void SalesForm_Load(object sender, EventArgs e)
         {
             conection = new ConectionDB();
@@ -162,8 +167,25 @@ namespace Sistema_de_Ventas
             var confirmResult = MessageBox.Show("Desea confirmar la venta?", "Confirmar Venta", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                conection.sale();
+                int id_sale = conection.insertSale(detailsDataTable.Rows.Count ,totalSale_input.Text);
+                if (id_sale == -1)
+                {
+                    MessageBox.Show("Error al Procesar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                foreach (DataRow row in detailsDataTable.Rows)
+                {
+                    bool res = conection.insertDetailSale(id_sale, row["Id"].ToString(), row["Nombre del Producto"].ToString(), row["Precio"].ToString(), row["Cantidad"].ToString(), row["Total"].ToString());
+                    if (!res)
+                    {
+                        MessageBox.Show("no se pudo insertar " + row["Nombre del Producto"].ToString());
+                    }
+                    bool res2 = conection.reduceInventory(row["Id"].ToString(), row["Cantidad"].ToString());
+                    if (!res2)
+                        MessageBox.Show("no se pudo reducir " + row["Nombre del Producto"].ToString());
+                }
                 detailsDataTable.Clear();
+                totalSale_input.Text = "00,00";
             }
         }
 
@@ -173,11 +195,11 @@ namespace Sistema_de_Ventas
             {
                 return;
             }
-            name_input.Text = detailsDataTable.Rows[e.RowIndex]["Nombre del Producto"].ToString();
-            price_input.Text = detailsDataTable.Rows[e.RowIndex]["Precio"].ToString();
-            amount_input.Text = detailsDataTable.Rows[e.RowIndex]["Cantidad"].ToString();
+            name_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["Nombre del Producto"].FormattedValue.ToString();
+            price_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["Precio"].FormattedValue.ToString();
+            amount_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["Cantidad"].FormattedValue.ToString();
 
-            detailsDataTable.Rows[e.RowIndex].Delete();
+            DetailDataGrid.Rows.RemoveAt(e.RowIndex);
             amount_input.Focus();
             calculateTotalSale();
         }
