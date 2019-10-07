@@ -82,9 +82,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 115);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Aqui puede modificar el inventario Interno (todo queda registrado en el Historial" +
-    "), tambien puede crear, modificar o eliminar (no recomendado) productos de la ba" +
-    "se de datos";
+            this.label1.Text = "Aqui puede crear, modificar o eliminar (no recomendado) productos como el precio," +
+    " nombre, stock minimo";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2

@@ -26,11 +26,26 @@ namespace Sistema_de_Ventas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TextBox objTextBox = (TextBox)sender;
-                string word = objTextBox.Text;
-                filter_word = word;
-                InventoryDataGrid.DataSource = conection.getProductsForPurchase(word.Trim());
+                filter_word = conection.validString(filterTextBox.Text);
+                filterTextBox.Text = filter_word;
+                InventoryDataGrid.DataSource = conection.getProductsForPurchase(filter_word);
+                formatDataGrid();
             }
+        }
+
+        private void formatDataGrid()
+        {
+            InventoryDataGrid.Columns["id"].Visible = false;
+            InventoryDataGrid.Columns["Nombre del Producto"].Width = 300;
+            InventoryDataGrid.Columns["Cantidad"].Width = 60;
+            InventoryDataGrid.Columns["Stock Minimo"].Width = 60;
+        }
+
+        private void clean()
+        {
+            name_input.Text = "";
+            amount_input.Text = "0,0";
+            price_input.Text = "0,0";
         }
 
         private void PurchaseForm_Load(object sender, EventArgs e)
@@ -46,10 +61,8 @@ namespace Sistema_de_Ventas
 
         private void InventoryDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || e.RowIndex >= InventoryDataGrid.RowCount - 1)
-            {
+            if (e.RowIndex == -1)
                 return;
-            }
             row_selected_id = InventoryDataGrid.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString();
             original_amount = InventoryDataGrid.Rows[e.RowIndex].Cells["Cantidad"].FormattedValue.ToString();
             string name = InventoryDataGrid.Rows[e.RowIndex].Cells["Nombre del Producto"].FormattedValue.ToString();
@@ -60,41 +73,44 @@ namespace Sistema_de_Ventas
         private void InsertButton_Click(object sender, EventArgs e)
         {
             if (row_selected_id == "")
-            {
                 return;
-            }
-            if (!validateAllFields())
-            {
-                return;
-            }
-            conection.RegisterWareHouseEntry(row_selected_id, name_input.Text, price_input.Text, amount_input.Text, original_amount);
-            MessageBox.Show("Exito!");
-            InventoryDataGrid.DataSource = conection.getProductsForPurchase(filter_word.Trim());
-        }
+            string amount = conection.validNumber(amount_input.Text);
+            string price = conection.validNumber(price_input.Text);
 
-        private bool validateAllFields()
+            if (price == "error")
+            {
+                MessageBox.Show("El precio no es valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (amount == "error")
+            {
+                MessageBox.Show("La cantidad no es valida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (conection.RegisterWareHouseEntry(row_selected_id, name_input.Text, price, amount))
+            {
+                
+                if (conection.updateCurrentStock(row_selected_id, original_amount, amount))
+                    MessageBox.Show("Entrada en almacen exitosa", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                else
+                    MessageBox.Show("Se hizo el registro de la entrada, pero no se pudo actualizar el stock actual", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("No se pudo crear el producto, puede que ya exista un producto con ese nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            InventoryDataGrid.DataSource = conection.getProductsForPurchase(filter_word);
+            formatDataGrid();
+            clean();
+            filterTextBox.Focus();
+        }
+                
+        private void PurchaseForm_Shown(object sender, EventArgs e)
         {
-            if (!conection.validateFieldAsNumber(amount_input.Text))
-            {
-                MessageBox.Show("Error en la cantidad");
-                return false;
-            }
-            if (!conection.validateFieldAsNumber(price_input.Text))
-            {
-                MessageBox.Show("Error en el precio");
-                return false;
-            }
-            if (float.Parse(amount_input.Text) <= 0.0f)
-            {
-                MessageBox.Show("Error en la cantidad");
-                return false;
-            }
-            if (float.Parse(price_input.Text) <= 0.0f)
-            {
-                MessageBox.Show("Error en el precio");
-                return false;
-            }
-            return true;
+            filterTextBox.Focus();
         }
     }
 }

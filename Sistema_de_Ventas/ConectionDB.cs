@@ -60,15 +60,14 @@ namespace Sistema_de_Ventas
 
         public DataTable getProductsForPurchase(string word)
         {
-            word = Regex.Replace(word, @"[^0-9A-Za-z ]", "", RegexOptions.None);
-            String query;
+            string query;
             if (word == "")
             {
-                query = "select id, name, amount from dbo.product;";
+                query = "select id, name, amount, minimum from dbo.product;";
             }
             else
             {
-                query = "select id, name, amount from dbo.product where name like '%" + word + "%';";
+                query = "select id, name, amount, minimum from dbo.product where name like '%" + word + "%';";
             }
             SqlCommand comando = new SqlCommand(query, conDB);
             SqlDataAdapter data = new SqlDataAdapter(comando);
@@ -76,6 +75,7 @@ namespace Sistema_de_Ventas
             data.Fill(tabla);
             tabla.Columns["name"].ColumnName = "Nombre del Producto";
             tabla.Columns["amount"].ColumnName = "Cantidad";
+            tabla.Columns["minimum"].ColumnName = "Stock Minimo";
 
             return tabla;
         }
@@ -161,20 +161,37 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool RegisterWareHouseEntry(string id_product, string name, string price, string amount, string original_amount)
+        public bool RegisterWareHouseEntry(string id_product, string name, string price, string amount)
         {
-            string n = Regex.Replace(name, @"[^0-9A-Za-z. ]", "", RegexOptions.None);
-            string a = Regex.Replace(amount, @"[^0-9.]", "", RegexOptions.None);
-            string p = Regex.Replace(price, @"[^0-9.]", "", RegexOptions.None);
-            float total = float.Parse(a) * float.Parse(p);
-            String query = "insert into dbo.entries values (" + id_product + ",'" + n + "'," + p + "," + a + "," + total.ToString() + ")";
-            SqlCommand comando = new SqlCommand(query, conDB);
-            comando.ExecuteNonQuery();
-            float new_amount = float.Parse(a) + float.Parse(original_amount);
-            query = "update dbo.product set amount=" + new_amount.ToString() + " where id=" + id_product + ";";
-            SqlCommand comando2 = new SqlCommand(query, conDB);
-            comando2.ExecuteNonQuery();
-            return true;
+            try
+            {
+                string query = "insert into dbo.entries values (" + id_product + ",'" + name + "'," + amount + "," + price + ")";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public bool updateCurrentStock (string id_product, string old_stock, string entry_stock)
+        {
+            try
+            {
+                float new_amount = float.Parse(old_stock.Replace(".", ",")) + float.Parse(entry_stock.Replace(".", ","));
+                string query = "update dbo.product set amount=" + validNumber(new_amount.ToString()) + " where id=" + id_product + ";";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
 
         public bool validateFieldAsNumber(string word)
