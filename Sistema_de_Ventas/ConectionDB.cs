@@ -242,7 +242,7 @@ namespace Sistema_de_Ventas
                 String query = "select amount from dbo.product where id=" + id_product;
                 SqlCommand comando = new SqlCommand(query, conDB);
                 float current = float.Parse(comando.ExecuteScalar().ToString());
-                float a = float.Parse(amount);
+                float a = float.Parse(amount.Replace(".", ","));
                 string new_amount = (current - a).ToString().Replace(",", ".");
                 query = "update dbo.product set amount=" + new_amount + " where id=" + id_product;
                 SqlCommand comando2 = new SqlCommand(query, conDB);

@@ -164,6 +164,11 @@ namespace Sistema_de_Ventas
 
         private void processButton_Click(object sender, EventArgs e)
         {
+            if (detailsDataTable.Rows.Count <= 0)
+            {
+                MessageBox.Show("Debe existir al menos un producto en la lista", "Faltan Productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             var confirmResult = MessageBox.Show("Desea confirmar la venta?", "Confirmar Venta", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
@@ -177,9 +182,7 @@ namespace Sistema_de_Ventas
                 {
                     bool res = conection.insertDetailSale(id_sale, row["Id"].ToString(), row["Nombre del Producto"].ToString(), row["Precio"].ToString(), row["Cantidad"].ToString(), row["Total"].ToString());
                     if (!res)
-                    {
                         MessageBox.Show("no se pudo insertar " + row["Nombre del Producto"].ToString());
-                    }
                     bool res2 = conection.reduceInventory(row["Id"].ToString(), row["Cantidad"].ToString());
                     if (!res2)
                         MessageBox.Show("no se pudo reducir " + row["Nombre del Producto"].ToString());
