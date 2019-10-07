@@ -37,17 +37,13 @@ namespace Sistema_de_Ventas
             conDB.Close();
         }
 
-        public DataTable getProducts(string word)
+        public DataTable getProductsInventory(string word)
         {
-            word = Regex.Replace(word, @"[^0-9A-Za-z ]", "", RegexOptions.None);
-            String query;
+            string query;
             if (word == "")
-            {
                 query = "select * from dbo.product;";
-            } else
-            {
+            else
                 query = "select * from dbo.product where name like '%" + word + "%';";
-            }
             SqlCommand comando = new SqlCommand(query, conDB);
             SqlDataAdapter data = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
@@ -57,6 +53,7 @@ namespace Sistema_de_Ventas
             tabla.Columns["sale_price"].ColumnName = "Precio de Venta";
             tabla.Columns["minimum"].ColumnName = "Stock Minimo";
             tabla.Columns["bar_code"].ColumnName = "Codigo de Barras";
+            tabla.Columns["photo"].ColumnName = "Imagen";
 
             return tabla;
         }
@@ -107,34 +104,61 @@ namespace Sistema_de_Ventas
 
         public bool CreateProduct(string name, string amount, string price, string stock)
         {
-            string n = Regex.Replace(name, @"[^0-9A-Za-z. ]", "", RegexOptions.None);
-            string a = Regex.Replace(amount, @"[^0-9.]", "", RegexOptions.None);
-            string p = Regex.Replace(price, @"[^0-9.]", "", RegexOptions.None);
-            string s = Regex.Replace(stock, @"[^0-9.]", "", RegexOptions.None);
-            String query = "insert into dbo.product values ('"+ n +"'," + a + "," + p + "," + s + ",NULL ,NULL)";
-            SqlCommand comando = new SqlCommand(query, conDB);
-            comando.ExecuteNonQuery();
-            return true;
+            try
+            {
+                string query = "select count(1) from dbo.product where name='" + name + "'";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                int res = (int)comando.ExecuteScalar();
+                if (res > 0)
+                    return false;
+                query = "insert into dbo.product values ('"+ name +"'," + amount + "," + stock + "," + price + ",NULL ,NULL)";
+                SqlCommand comando2 = new SqlCommand(query, conDB);
+                comando2.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
 
         public bool UpdateProduct(string id, string name, string amount, string price, string stock)
         {
-            string n = Regex.Replace(name, @"[^0-9A-Za-z. ]", "", RegexOptions.None);
-            string a = Regex.Replace(amount, @"[^0-9.]", "", RegexOptions.None);
-            string p = Regex.Replace(price, @"[^0-9.]", "", RegexOptions.None);
-            string s = Regex.Replace(stock, @"[^0-9.]", "", RegexOptions.None);
-            String query = "update dbo.product set name='" + n + "', amount=" + a + ", sale_price=" + p + ", minimum=" + s + " where id=" + id + ";";
-            SqlCommand comando = new SqlCommand(query, conDB);
-            comando.ExecuteNonQuery();
-            return true;
+            try
+            {
+                string query = "select count(1) from dbo.product where name='" + name + "' and id!=" + id;
+                SqlCommand comando = new SqlCommand(query, conDB);
+                int res = (int)comando.ExecuteScalar();
+                if (res > 0)
+                    return false;
+                query = "update dbo.product set name='" + name + "', amount=" + amount + ", sale_price=" + price + ", minimum=" + stock + " where id=" + id + ";";
+                SqlCommand comando2 = new SqlCommand(query, conDB);
+                comando2.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            
         }
 
         public bool DeleteProduct(string id)
         {
-            String query = "DELETE FROM dbo.product WHERE id=" + id + ";";
-            SqlCommand comando = new SqlCommand(query, conDB);
-            comando.ExecuteNonQuery();
-            return true;
+            try
+            {
+                string query = "DELETE FROM dbo.product WHERE id=" + id;
+                SqlCommand comando = new SqlCommand(query, conDB);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
 
         public bool RegisterWareHouseEntry(string id_product, string name, string price, string amount, string original_amount)
@@ -256,5 +280,23 @@ namespace Sistema_de_Ventas
             }
         }
 
+        public string validString(string word)
+        {
+            return Regex.Replace(word.Trim().ToLower(), @"[^0-9a-zñ., ]", "", RegexOptions.None);
+        }
+
+        public string validNumber(string word)
+        {
+            try
+            {
+                float temp = float.Parse(word.Trim().Replace(".", ","));
+                return temp.ToString().Replace(",",".");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return "error";
+            }
+        }
     }
 }
