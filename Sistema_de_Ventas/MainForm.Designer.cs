@@ -39,8 +39,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.backupButton = new System.Windows.Forms.Button();
             this.backupFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuPrincipalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.initBDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwordMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // InventoryButton
@@ -175,21 +180,50 @@
     "e vende menos, las ganancias registradas, etc.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // backupButton
-            // 
-            this.backupButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.backupButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.backupButton.Location = new System.Drawing.Point(918, 347);
-            this.backupButton.Name = "backupButton";
-            this.backupButton.Size = new System.Drawing.Size(193, 23);
-            this.backupButton.TabIndex = 10;
-            this.backupButton.Text = "Realizar Copia de Seguridad";
-            this.backupButton.UseVisualStyleBackColor = true;
-            this.backupButton.Click += new System.EventHandler(this.backupButton_Click);
-            // 
             // backupFolderBrowser
             // 
             this.backupFolderBrowser.Description = "Seleccione la carpeta donde desea guardar la copia de respado:";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPrincipalToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1140, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuPrincipalToolStripMenuItem
+            // 
+            this.menuPrincipalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.initBDMenuItem,
+            this.backupMenuItem,
+            this.passwordMenuItem});
+            this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
+            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.menuPrincipalToolStripMenuItem.Text = "Seguridad";
+            // 
+            // initBDMenuItem
+            // 
+            this.initBDMenuItem.Name = "initBDMenuItem";
+            this.initBDMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.initBDMenuItem.Text = "Iniciar Base de Datos";
+            this.initBDMenuItem.Click += new System.EventHandler(this.initBDMenuItem_Click);
+            // 
+            // backupMenuItem
+            // 
+            this.backupMenuItem.Name = "backupMenuItem";
+            this.backupMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.backupMenuItem.Text = "Copia de Seguridad";
+            this.backupMenuItem.Click += new System.EventHandler(this.backupMenuItem_Click);
+            // 
+            // passwordMenuItem
+            // 
+            this.passwordMenuItem.Name = "passwordMenuItem";
+            this.passwordMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.passwordMenuItem.Text = "Cambiar contraseña";
+            this.passwordMenuItem.Click += new System.EventHandler(this.passwordMenuItem_Click);
             // 
             // MainForm
             // 
@@ -197,7 +231,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1140, 382);
-            this.Controls.Add(this.backupButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -208,9 +241,16 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PurchasesButton);
             this.Controls.Add(this.InventoryButton);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Sistema de Ventas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -226,8 +266,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button backupButton;
         private System.Windows.Forms.FolderBrowserDialog backupFolderBrowser;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuPrincipalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem initBDMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backupMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem passwordMenuItem;
     }
 }
 

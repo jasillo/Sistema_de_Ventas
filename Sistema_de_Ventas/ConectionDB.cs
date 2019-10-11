@@ -28,13 +28,14 @@ namespace Sistema_de_Ventas
             }
             catch (Exception ex)
             {
-                Console.WriteLine("fallo conneccion a base de datos");
+                Console.WriteLine("fallo conneccion a base de datos: " + ex.ToString());
             }
         }
 
         public void closeConnection()
         {
             conDB.Close();
+            Console.WriteLine("coneccion a base de datos terminada");
         }
 
         public DataTable getProductsInventory(string word)
@@ -194,34 +195,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool validateFieldAsNumber(string word)
-        {
-            string temp0 = word.Trim();
-            string temp1 = Regex.Replace(temp0, @"[^0-9.]", "", RegexOptions.None).Trim();
-            if (temp1 == "" || temp1 == "." || temp0 != temp1)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool validateFieldAsString(string word)
-        {
-            string temp0 = word.Trim();
-            string temp1 = Regex.Replace(temp0, @"[^0-9A-Za-z. ]", "", RegexOptions.None).Trim();
-            if (temp1 == "" || temp0 != temp1)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public string decimalFormat(string word)
-        {
-            return Regex.Replace(word, @"[^0-9.]", "", RegexOptions.None).Trim();
-        }
-
-        public bool makeBackup(string dir)
+       public bool makeBackup(string dir)
         {
             try
             {
@@ -315,5 +289,38 @@ namespace Sistema_de_Ventas
                 return "error";
             }
         }
+
+        public int getUserID(string username, string pwd)
+        {
+            try
+            {
+                string query = "select id from dbo.users where username='" + username + "' and PWDCOMPARE('" + pwd +"', password)= 1";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                int res = (int)comando.ExecuteScalar();
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return -1;
+            }
+        }
+
+        public bool changePassword(int id, string new_pwd)
+        {
+            try
+            { 
+                string query = "update dbo.users set password=PWDENCRYPT('" + new_pwd + "') where id=" + id.ToString();
+                SqlCommand comando2 = new SqlCommand(query, conDB);
+                comando2.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
     }
 }
