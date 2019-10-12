@@ -12,7 +12,6 @@ namespace Sistema_de_Ventas
 {
     public partial class InventoryForm : Form
     {
-        ConectionDB conection;
         string row_selected_id = "";
         string filter_word = "";
 
@@ -25,9 +24,9 @@ namespace Sistema_de_Ventas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                filter_word = conection.validString(filterTextBox.Text);
+                filter_word = ConDB.validString(filterTextBox.Text);
                 filterTextBox.Text = filter_word;
-                InventoryDataGrid.DataSource = conection.getProductsInventory(filter_word);
+                InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
                 formatDataGrid();
             }
         }
@@ -41,17 +40,6 @@ namespace Sistema_de_Ventas
             InventoryDataGrid.Columns["Stock Minimo"].Width = 60;
             InventoryDataGrid.Columns["Codigo de Barras"].Visible = false;
             InventoryDataGrid.Columns["Imagen"].Visible = false;
-        }
-
-        private void InventoryForm_Load(object sender, EventArgs e)
-        {
-            conection = new ConectionDB();
-            conection.openConnection();
-        }
-
-        private void InventoryForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            conection.closeConnection();
         }
 
         private void InventoryDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -92,10 +80,10 @@ namespace Sistema_de_Ventas
 
         private void InsertButton_Click(object sender, EventArgs e)
         {
-            string name = conection.validString(name_input.Text);
-            string amount = conection.validNumber(amount_input.Text);
-            string price = conection.validNumber(price_input.Text);
-            string stock = conection.validNumber(stock_input.Text);
+            string name = ConDB.validString(name_input.Text);
+            string amount = ConDB.validNumber(amount_input.Text);
+            string price = ConDB.validNumber(price_input.Text);
+            string stock = ConDB.validNumber(stock_input.Text);
 
             name_input.Text = name;
             if (price == "error")
@@ -108,16 +96,17 @@ namespace Sistema_de_Ventas
                 MessageBox.Show("El stock no es valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            if (conection.CreateProduct(name, amount, price, stock))
+
+            if (ConDB.CreateProduct(name, amount, price, stock))
             {
                 MessageBox.Show("Producto creado exitosamente", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            } else
+            }
+            else
             {
                 MessageBox.Show("No se pudo crear el producto, puede que ya exista un producto con ese nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            InventoryDataGrid.DataSource = conection.getProductsInventory(filter_word);
+            InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
             formatDataGrid();
             clean();
             filterTextBox.Focus();
@@ -125,10 +114,10 @@ namespace Sistema_de_Ventas
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string name = conection.validString(name_input.Text);
-            string amount = conection.validNumber(amount_input.Text);
-            string price = conection.validNumber(price_input.Text);
-            string stock = conection.validNumber(stock_input.Text);
+            string name = ConDB.validString(name_input.Text);
+            string amount = ConDB.validNumber(amount_input.Text);
+            string price = ConDB.validNumber(price_input.Text);
+            string stock = ConDB.validNumber(stock_input.Text);
 
             name_input.Text = name;
             if (price == "error")
@@ -141,7 +130,7 @@ namespace Sistema_de_Ventas
                 MessageBox.Show("El stock no es valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (conection.UpdateProduct(row_selected_id, name, amount, price, stock))
+            if (ConDB.UpdateProduct(row_selected_id, name, amount, price, stock))
             {
                 MessageBox.Show("Producto modificado exitosamente", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
@@ -150,7 +139,7 @@ namespace Sistema_de_Ventas
                 MessageBox.Show("No se pudo modificar el producto, puede que ya exista un producto con ese nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            InventoryDataGrid.DataSource = conection.getProductsInventory(filter_word);
+            InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
             formatDataGrid();
             clean();
             filterTextBox.Focus();
@@ -161,15 +150,16 @@ namespace Sistema_de_Ventas
             var confirmResult = MessageBox.Show("Esta seguro que desea borra este producto? esto conlleva a perdida de información", "Confirmar Borrado!!", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                if (conection.DeleteProduct(row_selected_id))
+                if (ConDB.DeleteProduct(row_selected_id))
                 {
                     MessageBox.Show("El Producto fue eliminado exitosamente", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                } else
+                }
+                else
                 {
                     MessageBox.Show("No se pudo eliminar el producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                InventoryDataGrid.DataSource = conection.getProductsInventory(filter_word);
+                InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
                 formatDataGrid();
                 clean();
                 filterTextBox.Focus();

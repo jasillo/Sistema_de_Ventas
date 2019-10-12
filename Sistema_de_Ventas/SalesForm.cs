@@ -12,7 +12,6 @@ namespace Sistema_de_Ventas
 {
     public partial class SalesForm : Form
     {
-        ConectionDB conection;
         string row_selected_id = "";
         string filter_word = "";
         float current_amount = 0.0f;
@@ -25,19 +24,8 @@ namespace Sistema_de_Ventas
 
         private void SalesForm_Shown(object sender, EventArgs e)
         {
-            filterTextBox.Focus();
-        }
-
-        private void SalesForm_Load(object sender, EventArgs e)
-        {
-            conection = new ConectionDB();
-            conection.openConnection();
             setDetailsGridFormat();
-        }
-
-        private void SalesForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            conection.closeConnection();
+            filterTextBox.Focus();
         }
 
         private void filterTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -45,7 +33,7 @@ namespace Sistema_de_Ventas
             if (e.KeyCode == Keys.Enter)
             {
                 filter_word = filterTextBox.Text.Trim();
-                InventoryDataGrid.DataSource = conection.getProductsForSales(filter_word);
+                InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
                 setProductsGridFormat();
             }
         }
@@ -172,7 +160,7 @@ namespace Sistema_de_Ventas
             var confirmResult = MessageBox.Show("Desea confirmar la venta?", "Confirmar Venta", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                int id_sale = conection.insertSale(detailsDataTable.Rows.Count ,totalSale_input.Text);
+                int id_sale = ConDB.insertSale(detailsDataTable.Rows.Count, totalSale_input.Text);
                 if (id_sale == -1)
                 {
                     MessageBox.Show("Error al Procesar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -180,10 +168,10 @@ namespace Sistema_de_Ventas
                 }
                 foreach (DataRow row in detailsDataTable.Rows)
                 {
-                    bool res = conection.insertDetailSale(id_sale, row["Id"].ToString(), row["Nombre del Producto"].ToString(), row["Precio"].ToString(), row["Cantidad"].ToString(), row["Total"].ToString());
+                    bool res = ConDB.insertDetailSale(id_sale, row["Id"].ToString(), row["Nombre del Producto"].ToString(), row["Precio"].ToString(), row["Cantidad"].ToString(), row["Total"].ToString());
                     if (!res)
                         MessageBox.Show("no se pudo insertar " + row["Nombre del Producto"].ToString());
-                    bool res2 = conection.reduceInventory(row["Id"].ToString(), row["Cantidad"].ToString());
+                    bool res2 = ConDB.reduceInventory(row["Id"].ToString(), row["Cantidad"].ToString());
                     if (!res2)
                         MessageBox.Show("no se pudo reducir " + row["Nombre del Producto"].ToString());
                 }

@@ -42,8 +42,6 @@
             this.backupFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuPrincipalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.initBDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -197,26 +195,10 @@
             // menuPrincipalToolStripMenuItem
             // 
             this.menuPrincipalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.initBDMenuItem,
-            this.backupMenuItem,
             this.passwordMenuItem});
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
-            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.menuPrincipalToolStripMenuItem.Text = "Seguridad";
-            // 
-            // initBDMenuItem
-            // 
-            this.initBDMenuItem.Name = "initBDMenuItem";
-            this.initBDMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.initBDMenuItem.Text = "Iniciar Base de Datos";
-            this.initBDMenuItem.Click += new System.EventHandler(this.initBDMenuItem_Click);
-            // 
-            // backupMenuItem
-            // 
-            this.backupMenuItem.Name = "backupMenuItem";
-            this.backupMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.backupMenuItem.Text = "Copia de Seguridad";
-            this.backupMenuItem.Click += new System.EventHandler(this.backupMenuItem_Click);
+            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.menuPrincipalToolStripMenuItem.Text = "Usuario";
             // 
             // passwordMenuItem
             // 
@@ -245,8 +227,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Sistema de Ventas";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -269,8 +249,6 @@
         private System.Windows.Forms.FolderBrowserDialog backupFolderBrowser;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuPrincipalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem initBDMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem backupMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordMenuItem;
     }
 }

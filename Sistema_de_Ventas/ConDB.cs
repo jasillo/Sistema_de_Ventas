@@ -9,36 +9,66 @@ using System.Text.RegularExpressions;
 
 namespace Sistema_de_Ventas
 {
-    class ConectionDB
+    public static class ConDB
     {
-        string cadena = "Data Source=DESKTOP-E68479P\\SQLEXPRESS;Initial Catalog=SalesSystemDB; Integrated Security=True";
-        public SqlConnection conDB = new SqlConnection();
+        private static string cadena;
+        private static SqlConnection conDB = new SqlConnection();
+        public static int userId = -1;
 
-        public ConectionDB()
+        public static bool openConnection()
         {
-            conDB.ConnectionString = cadena;
-        }
-
-        public void openConnection()
-        {
+            try
+            {
+                cadena = "Data Source=DESKTOP-E68479P\\SQLEXPRESS;Initial Catalog=SalesSystemDB; Integrated Security=True";
+                conDB.ConnectionString = cadena;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error al consegurir configurarcion o coneccion esta ya iniciada");
+            }
             try
             {
                 conDB.Open();
                 Console.WriteLine("coneccion a base de datos iniciada");
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("fallo conneccion a base de datos: " + ex.ToString());
+                return false;
             }
         }
 
-        public void closeConnection()
+        public static void closeConnection()
         {
-            conDB.Close();
-            Console.WriteLine("coneccion a base de datos terminada");
+            try
+            {
+                conDB.Close();
+                Console.WriteLine("coneccion a base de datos terminada");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("fallo al cerrar la coneccion: " + ex.ToString());
+            }
         }
 
-        public DataTable getProductsInventory(string word)
+        public static bool login(string username, string pasword)
+        {
+            try
+            {
+                userId = getUserID(username, pasword);
+                if (userId == -1)
+                    return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public static DataTable getProductsList(string word)
         {
             string query;
             if (word == "")
@@ -49,61 +79,61 @@ namespace Sistema_de_Ventas
             SqlDataAdapter data = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
             data.Fill(tabla);
-            tabla.Columns["name"].ColumnName = "Nombre del Producto";
-            tabla.Columns["amount"].ColumnName = "Cantidad";
-            tabla.Columns["sale_price"].ColumnName = "Precio de Venta";
-            tabla.Columns["minimum"].ColumnName = "Stock Minimo";
-            tabla.Columns["bar_code"].ColumnName = "Codigo de Barras";
-            tabla.Columns["photo"].ColumnName = "Imagen";
+            //tabla.Columns["name"].ColumnName = "Nombre del Producto";
+            //tabla.Columns["amount"].ColumnName = "Cantidad";
+            //tabla.Columns["sale_price"].ColumnName = "Precio de Venta";
+            //tabla.Columns["minimum"].ColumnName = "Stock Minimo";
+            //tabla.Columns["bar_code"].ColumnName = "Codigo de Barras";
+            //tabla.Columns["photo"].ColumnName = "Imagen";
 
             return tabla;
         }
 
-        public DataTable getProductsForPurchase(string word)
-        {
-            string query;
-            if (word == "")
-            {
-                query = "select id, name, amount, minimum from dbo.product;";
-            }
-            else
-            {
-                query = "select id, name, amount, minimum from dbo.product where name like '%" + word + "%';";
-            }
-            SqlCommand comando = new SqlCommand(query, conDB);
-            SqlDataAdapter data = new SqlDataAdapter(comando);
-            DataTable tabla = new DataTable();
-            data.Fill(tabla);
-            tabla.Columns["name"].ColumnName = "Nombre del Producto";
-            tabla.Columns["amount"].ColumnName = "Cantidad";
-            tabla.Columns["minimum"].ColumnName = "Stock Minimo";
+        //public DataTable getProductsForPurchase(string word)
+        //{
+        //    string query;
+        //    if (word == "")
+        //    {
+        //        query = "select id, name, amount, minimum from dbo.product;";
+        //    }
+        //    else
+        //    {
+        //        query = "select id, name, amount, minimum from dbo.product where name like '%" + word + "%';";
+        //    }
+        //    SqlCommand comando = new SqlCommand(query, conDB);
+        //    SqlDataAdapter data = new SqlDataAdapter(comando);
+        //    DataTable tabla = new DataTable();
+        //    data.Fill(tabla);
+        //    tabla.Columns["name"].ColumnName = "Nombre del Producto";
+        //    tabla.Columns["amount"].ColumnName = "Cantidad";
+        //    tabla.Columns["minimum"].ColumnName = "Stock Minimo";
 
-            return tabla;
-        }
+        //    return tabla;
+        //}
 
-        public DataTable getProductsForSales(string word)
-        {
-            word = Regex.Replace(word, @"[^0-9A-Za-z ]", "", RegexOptions.None);
-            String query;
-            if (word == "")
-            {
-                query = "select id, name, sale_price from dbo.product;";
-            }
-            else
-            {
-                query = "select id, sale_price, name from dbo.product where name like '%" + word + "%';";
-            }
-            SqlCommand comando = new SqlCommand(query, conDB);
-            SqlDataAdapter data = new SqlDataAdapter(comando);
-            DataTable tabla = new DataTable();
-            data.Fill(tabla);
-            tabla.Columns["name"].ColumnName = "Nombre del Producto";
-            tabla.Columns["sale_price"].ColumnName = "Precio";
+        //public DataTable getProductsForSales(string word)
+        //{
+        //    word = Regex.Replace(word, @"[^0-9A-Za-z ]", "", RegexOptions.None);
+        //    String query;
+        //    if (word == "")
+        //    {
+        //        query = "select id, name, sale_price from dbo.product;";
+        //    }
+        //    else
+        //    {
+        //        query = "select id, sale_price, name from dbo.product where name like '%" + word + "%';";
+        //    }
+        //    SqlCommand comando = new SqlCommand(query, conDB);
+        //    SqlDataAdapter data = new SqlDataAdapter(comando);
+        //    DataTable tabla = new DataTable();
+        //    data.Fill(tabla);
+        //    tabla.Columns["name"].ColumnName = "Nombre del Producto";
+        //    tabla.Columns["sale_price"].ColumnName = "Precio";
 
-            return tabla;
-        }
+        //    return tabla;
+        //}
 
-        public bool CreateProduct(string name, string amount, string price, string stock)
+        public static bool CreateProduct(string name, string amount, string price, string stock)
         {
             try
             {
@@ -124,7 +154,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool UpdateProduct(string id, string name, string amount, string price, string stock)
+        public static bool UpdateProduct(string id, string name, string amount, string price, string stock)
         {
             try
             {
@@ -146,7 +176,7 @@ namespace Sistema_de_Ventas
             
         }
 
-        public bool DeleteProduct(string id)
+        public static bool DeleteProduct(string id)
         {
             try
             {
@@ -162,7 +192,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool RegisterWareHouseEntry(string id_product, string name, string price, string amount)
+        public static bool RegisterWareHouseEntry(string id_product, string name, string price, string amount)
         {
             try
             {
@@ -178,7 +208,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool updateCurrentStock (string id_product, string old_stock, string entry_stock)
+        public static bool updateCurrentStock (string id_product, string old_stock, string entry_stock)
         {
             try
             {
@@ -195,7 +225,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-       public bool makeBackup(string dir)
+       public static bool makeBackup(string dir)
         {
             try
             {
@@ -212,7 +242,7 @@ namespace Sistema_de_Ventas
             return true;
         }
 
-        public int insertSale(int amount, string total)
+        public static int insertSale(int amount, string total)
         {
             try
             {
@@ -230,7 +260,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool insertDetailSale(int id_sale, string id_product, string product_name, string price, string amount, string total)
+        public static bool insertDetailSale(int id_sale, string id_product, string product_name, string price, string amount, string total)
         {
             try
             {
@@ -250,7 +280,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool reduceInventory(string id_product, string amount)
+        public static bool reduceInventory(string id_product, string amount)
         {
             try
             {
@@ -271,12 +301,12 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public string validString(string word)
+        public static string validString(string word)
         {
             return Regex.Replace(word.Trim().ToLower(), @"[^0-9a-zñ., ]", "", RegexOptions.None);
         }
 
-        public string validNumber(string word)
+        public static string validNumber(string word)
         {
             try
             {
@@ -290,7 +320,7 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public int getUserID(string username, string pwd)
+        public static int getUserID(string username, string pwd)
         {
             try
             {
@@ -306,11 +336,11 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public bool changePassword(int id, string new_pwd)
+        public static bool changePassword(string new_pwd)
         {
             try
             { 
-                string query = "update dbo.users set password=PWDENCRYPT('" + new_pwd + "') where id=" + id.ToString();
+                string query = "update dbo.users set password=PWDENCRYPT('" + new_pwd + "') where id=" + userId.ToString();
                 SqlCommand comando2 = new SqlCommand(query, conDB);
                 comando2.ExecuteNonQuery();
                 return true;

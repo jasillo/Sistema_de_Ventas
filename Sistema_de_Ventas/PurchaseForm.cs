@@ -12,7 +12,6 @@ namespace Sistema_de_Ventas
 {
     public partial class PurchaseForm : Form
     {
-        ConectionDB conection;
         string row_selected_id = "";
         string filter_word = "";
         string original_amount = "";
@@ -26,9 +25,9 @@ namespace Sistema_de_Ventas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                filter_word = conection.validString(filterTextBox.Text);
+                filter_word = ConDB.validString(filterTextBox.Text);
                 filterTextBox.Text = filter_word;
-                InventoryDataGrid.DataSource = conection.getProductsForPurchase(filter_word);
+                InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
                 formatDataGrid();
             }
         }
@@ -47,18 +46,7 @@ namespace Sistema_de_Ventas
             amount_input.Text = "0,0";
             price_input.Text = "0,0";
         }
-
-        private void PurchaseForm_Load(object sender, EventArgs e)
-        {
-            conection = new ConectionDB();
-            conection.openConnection();
-        }
-
-        private void PurchaseForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            conection.closeConnection();
-        }
-
+            
         private void InventoryDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
@@ -74,8 +62,8 @@ namespace Sistema_de_Ventas
         {
             if (row_selected_id == "")
                 return;
-            string amount = conection.validNumber(amount_input.Text);
-            string price = conection.validNumber(price_input.Text);
+            string amount = ConDB.validNumber(amount_input.Text);
+            string price = ConDB.validNumber(price_input.Text);
 
             if (price == "error")
             {
@@ -88,10 +76,10 @@ namespace Sistema_de_Ventas
                 return;
             }
 
-            if (conection.RegisterWareHouseEntry(row_selected_id, name_input.Text, price, amount))
+            if (ConDB.RegisterWareHouseEntry(row_selected_id, name_input.Text, price, amount))
             {
-                
-                if (conection.updateCurrentStock(row_selected_id, original_amount, amount))
+
+                if (ConDB.updateCurrentStock(row_selected_id, original_amount, amount))
                     MessageBox.Show("Entrada en almacen exitosa", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 else
                     MessageBox.Show("Se hizo el registro de la entrada, pero no se pudo actualizar el stock actual", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -102,7 +90,7 @@ namespace Sistema_de_Ventas
                 return;
             }
 
-            InventoryDataGrid.DataSource = conection.getProductsForPurchase(filter_word);
+            InventoryDataGrid.DataSource = ConDB.getProductsList(filter_word);
             formatDataGrid();
             clean();
             filterTextBox.Focus();
