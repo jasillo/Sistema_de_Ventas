@@ -27,5 +27,10 @@ namespace Sistema_de_Ventas
                     MessageBox.Show("Error al crear el backup", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void StadisticsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ConDB.mainForm.Show();
+        }
     }
 }

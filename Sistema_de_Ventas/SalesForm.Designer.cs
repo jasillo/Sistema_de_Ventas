@@ -52,6 +52,7 @@
             // 
             // InventoryDataGrid
             // 
+            this.InventoryDataGrid.BackgroundColor = System.Drawing.Color.White;
             this.InventoryDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.InventoryDataGrid.Location = new System.Drawing.Point(12, 66);
             this.InventoryDataGrid.MultiSelect = false;
@@ -172,6 +173,7 @@
             this.DetailDataGrid.AllowUserToDeleteRows = false;
             this.DetailDataGrid.AllowUserToResizeColumns = false;
             this.DetailDataGrid.AllowUserToResizeRows = false;
+            this.DetailDataGrid.BackgroundColor = System.Drawing.Color.White;
             this.DetailDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DetailDataGrid.Location = new System.Drawing.Point(455, 190);
             this.DetailDataGrid.MultiSelect = false;
@@ -227,6 +229,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1138, 575);
             this.Controls.Add(this.processButton);
             this.Controls.Add(this.totalSale_input);
@@ -246,7 +249,9 @@
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.InventoryDataGrid);
             this.Name = "SalesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Formulario de Ventas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SalesForm_FormClosing);
             this.Shown += new System.EventHandler(this.SalesForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetailDataGrid)).EndInit();

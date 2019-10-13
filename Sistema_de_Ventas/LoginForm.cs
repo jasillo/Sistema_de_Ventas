@@ -69,8 +69,10 @@ namespace Sistema_de_Ventas
 
             if (ConDB.login(uname, pwd))
             {
-                Form mainForm = new MainForm();
-                mainForm.ShowDialog();
+                this.Hide();
+                ConDB.mainForm = new MainForm();
+                ConDB.mainForm.ShowDialog();
+                this.Close();
             }
             else
             {

@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Sistema_de_Ventas
 {
     public static class ConDB
     {
+        public static Form mainForm;
         private static string cadena;
         private static SqlConnection conDB = new SqlConnection();
         public static int userId = -1;
@@ -75,16 +77,23 @@ namespace Sistema_de_Ventas
         public static DataTable getProductsList(string word)
         {
             string query;
-            if (word == "")
-                query = "select * from dbo.product;";
-            else
-                query = "select * from dbo.product where name like '%" + word + "%';";
-            SqlCommand comando = new SqlCommand(query, conDB);
-            SqlDataAdapter data = new SqlDataAdapter(comando);
-            DataTable tabla = new DataTable();
-            data.Fill(tabla);
-
-            return tabla;
+            try
+            {
+                if (word == "")
+                    query = "select * from dbo.product;";
+                else
+                    query = "select * from dbo.product where name like '%" + word + "%';";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return new DataTable();
+            }
         }
 
         public static bool CreateProduct(string name, string amount, string price, string stock)
@@ -153,7 +162,7 @@ namespace Sistema_de_Ventas
         {
             try
             {
-                string query = "insert into dbo.entries values (" + id_product + ",'" + name + "'," + amount + "," + price + ")";
+                string query = "insert into dbo.entries values (" + id_product + ",'" + name + "'," + amount + "," + price + "," + userId + ")";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 comando.ExecuteNonQuery();
                 return true;
@@ -210,7 +219,7 @@ namespace Sistema_de_Ventas
                 string a = amount.ToString();
                 string t = total.Replace(",", ".");
                 DateTime today = DateTime.Today;
-                String query = "insert into dbo.sale output INSERTED.ID values (NULL," + a + "," + t + ",'" + today.ToString() + "')";
+                String query = "insert into dbo.sale output INSERTED.ID values (NULL," + a + "," + t + ",'" + today.ToString() + "'," + userId + ")";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 int res = (int)comando.ExecuteScalar();
                 return res;

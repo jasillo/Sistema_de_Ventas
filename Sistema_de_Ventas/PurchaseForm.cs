@@ -107,5 +107,10 @@ namespace Sistema_de_Ventas
         {
             filterTextBox.Focus();
         }
+
+        private void PurchaseForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ConDB.mainForm.Show();
+        }
     }
 }

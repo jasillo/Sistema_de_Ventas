@@ -203,5 +203,10 @@ namespace Sistema_de_Ventas
             amount_input.Focus();
             calculateTotalSale();
         }
+
+        private void SalesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ConDB.mainForm.Show();
+        }
     }
 }

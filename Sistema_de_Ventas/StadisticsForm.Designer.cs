@@ -56,7 +56,7 @@
             // passwordMenuItem
             // 
             this.passwordMenuItem.Name = "passwordMenuItem";
-            this.passwordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.passwordMenuItem.Size = new System.Drawing.Size(177, 22);
             this.passwordMenuItem.Text = "Copia de Seguridad";
             this.passwordMenuItem.Click += new System.EventHandler(this.passwordMenuItem_Click);
             // 
@@ -68,10 +68,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(989, 533);
             this.Controls.Add(this.menuStrip1);
             this.Name = "StadisticsForm";
             this.Text = "StadisticsForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StadisticsForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

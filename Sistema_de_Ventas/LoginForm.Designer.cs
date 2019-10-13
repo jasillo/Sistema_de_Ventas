@@ -71,7 +71,7 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(155, 107);
+            this.loginButton.Location = new System.Drawing.Point(160, 107);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(75, 23);
             this.loginButton.TabIndex = 12;
@@ -82,7 +82,7 @@
             // conection_label
             // 
             this.conection_label.AutoSize = true;
-            this.conection_label.Location = new System.Drawing.Point(228, 176);
+            this.conection_label.Location = new System.Drawing.Point(113, 167);
             this.conection_label.Name = "conection_label";
             this.conection_label.Size = new System.Drawing.Size(178, 13);
             this.conection_label.TabIndex = 13;
@@ -94,7 +94,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 198);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(399, 198);
             this.Controls.Add(this.conection_label);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.pwd_input);
@@ -102,7 +103,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Login";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);

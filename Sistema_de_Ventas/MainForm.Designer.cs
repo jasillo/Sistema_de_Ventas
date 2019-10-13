@@ -47,6 +47,7 @@
             // 
             // label1
             // 
+            this.label1.Enabled = false;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 200);
             this.label1.Name = "label1";
@@ -58,6 +59,7 @@
             // 
             // label2
             // 
+            this.label2.Enabled = false;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(231, 200);
             this.label2.Name = "label2";
@@ -69,6 +71,7 @@
             // 
             // label3
             // 
+            this.label3.Enabled = false;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(459, 200);
             this.label3.Name = "label3";
@@ -79,6 +82,7 @@
             // 
             // label4
             // 
+            this.label4.Enabled = false;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(687, 200);
             this.label4.Name = "label4";
@@ -90,6 +94,7 @@
             // 
             // label5
             // 
+            this.label5.Enabled = false;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(915, 200);
             this.label5.Name = "label5";
@@ -101,12 +106,13 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuPrincipalToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1140, 24);
-            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // menuPrincipalToolStripMenuItem
@@ -135,7 +141,7 @@
             this.stadisticsButton.Location = new System.Drawing.Point(928, 57);
             this.stadisticsButton.Name = "stadisticsButton";
             this.stadisticsButton.Size = new System.Drawing.Size(183, 132);
-            this.stadisticsButton.TabIndex = 6;
+            this.stadisticsButton.TabIndex = 5;
             this.stadisticsButton.Text = "Estadisticas";
             this.stadisticsButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.stadisticsButton.UseVisualStyleBackColor = true;
@@ -151,7 +157,7 @@
             this.historicalButton.Location = new System.Drawing.Point(699, 57);
             this.historicalButton.Name = "historicalButton";
             this.historicalButton.Size = new System.Drawing.Size(183, 132);
-            this.historicalButton.TabIndex = 5;
+            this.historicalButton.TabIndex = 4;
             this.historicalButton.Text = "Historial";
             this.historicalButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.historicalButton.UseVisualStyleBackColor = true;
@@ -166,7 +172,7 @@
             this.SalesButton.Location = new System.Drawing.Point(472, 57);
             this.SalesButton.Name = "SalesButton";
             this.SalesButton.Size = new System.Drawing.Size(183, 136);
-            this.SalesButton.TabIndex = 4;
+            this.SalesButton.TabIndex = 3;
             this.SalesButton.Text = "Ventas";
             this.SalesButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.SalesButton.UseVisualStyleBackColor = true;
@@ -208,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1140, 382);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -223,6 +229,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sistema de Ventas";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.menuStrip1.ResumeLayout(false);
