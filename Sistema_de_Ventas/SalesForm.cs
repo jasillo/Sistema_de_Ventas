@@ -40,27 +40,37 @@ namespace Sistema_de_Ventas
 
         private void setProductsGridFormat()
         {
-            InventoryDataGrid.Columns[0].Width = 25;
-            InventoryDataGrid.Columns[0].Visible = false;
-            InventoryDataGrid.Columns[0].Resizable = DataGridViewTriState.False;
-            InventoryDataGrid.Columns["Precio"].Width = 60;
-            InventoryDataGrid.Columns["Nombre del Producto"].Width = 300;
+            InventoryDataGrid.Columns["name"].HeaderText = "Nombre del Producto";
+            InventoryDataGrid.Columns["sale_price"].HeaderText = "Precio de Venta";
+
+            InventoryDataGrid.Columns["id"].Visible = false;
+            InventoryDataGrid.Columns["name"].Width = 300;
+            InventoryDataGrid.Columns["amount"].Visible = false;
+            InventoryDataGrid.Columns["sale_price"].Width = 60;
+            InventoryDataGrid.Columns["minimum"].Visible = false;
+            InventoryDataGrid.Columns["bar_code"].Visible = false;
+            InventoryDataGrid.Columns["photo"].Visible = false;
         }
 
         private void setDetailsGridFormat()
         {
             DetailDataGrid.DataSource = detailsDataTable;
-            detailsDataTable.Columns.Add("Id");
-            detailsDataTable.Columns.Add("Nombre del Producto");
-            detailsDataTable.Columns.Add("Precio");
-            detailsDataTable.Columns.Add("Cantidad");
-            detailsDataTable.Columns.Add("Total");
-            DetailDataGrid.Columns["Id"].Visible = false;
+            detailsDataTable.Columns.Add("id");
+            detailsDataTable.Columns.Add("name");
+            detailsDataTable.Columns.Add("price");
+            detailsDataTable.Columns.Add("amount");
+            detailsDataTable.Columns.Add("total");
 
-            DetailDataGrid.Columns["Nombre del Producto"].Width = 300;
-            DetailDataGrid.Columns["Precio"].Width = 70;
-            DetailDataGrid.Columns["Cantidad"].Width = 70;
-            DetailDataGrid.Columns["Total"].Width = 70;
+            DetailDataGrid.Columns["id"].Visible = false;
+            DetailDataGrid.Columns["name"].Width = 300;
+            DetailDataGrid.Columns["price"].Width = 70;
+            DetailDataGrid.Columns["amount"].Width = 70;
+            DetailDataGrid.Columns["total"].Width = 70;
+
+            DetailDataGrid.Columns["name"].HeaderText = "Nombre del Producto";
+            DetailDataGrid.Columns["price"].HeaderText = "Precio Unidad";
+            DetailDataGrid.Columns["amount"].HeaderText = "Cantidad";
+            DetailDataGrid.Columns["total"].HeaderText = "Total";
         }
 
         private void InventoryDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -70,12 +80,11 @@ namespace Sistema_de_Ventas
                 return;
             }
             row_selected_id = InventoryDataGrid.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString();
-            string price = InventoryDataGrid.Rows[e.RowIndex].Cells["Precio"].FormattedValue.ToString();
-            string name = InventoryDataGrid.Rows[e.RowIndex].Cells["Nombre del Producto"].FormattedValue.ToString();
+            string price = InventoryDataGrid.Rows[e.RowIndex].Cells["price"].FormattedValue.ToString();
+            string name = InventoryDataGrid.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
 
             name_input.Text = name;
             price_input.Text = price;
-            //total_input.Text = (float.Parse(price) * float.Parse(amount_input.Text)).ToString();
             amount_input.Focus();
         }
 
@@ -168,12 +177,12 @@ namespace Sistema_de_Ventas
                 }
                 foreach (DataRow row in detailsDataTable.Rows)
                 {
-                    bool res = ConDB.insertDetailSale(id_sale, row["Id"].ToString(), row["Nombre del Producto"].ToString(), row["Precio"].ToString(), row["Cantidad"].ToString(), row["Total"].ToString());
+                    bool res = ConDB.insertDetailSale(id_sale, row["id"].ToString(), row["name"].ToString(), row["price"].ToString(), row["amount"].ToString(), row["total"].ToString());
                     if (!res)
-                        MessageBox.Show("no se pudo insertar " + row["Nombre del Producto"].ToString());
-                    bool res2 = ConDB.reduceInventory(row["Id"].ToString(), row["Cantidad"].ToString());
+                        MessageBox.Show("no se pudo insertar " + row["name"].ToString());
+                    bool res2 = ConDB.reduceInventory(row["id"].ToString(), row["amount"].ToString());
                     if (!res2)
-                        MessageBox.Show("no se pudo reducir " + row["Nombre del Producto"].ToString());
+                        MessageBox.Show("no se pudo reducir " + row["name"].ToString());
                 }
                 detailsDataTable.Clear();
                 totalSale_input.Text = "00,00";
@@ -186,9 +195,9 @@ namespace Sistema_de_Ventas
             {
                 return;
             }
-            name_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["Nombre del Producto"].FormattedValue.ToString();
-            price_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["Precio"].FormattedValue.ToString();
-            amount_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["Cantidad"].FormattedValue.ToString();
+            name_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
+            price_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["price"].FormattedValue.ToString();
+            amount_input.Text = DetailDataGrid.Rows[e.RowIndex].Cells["amount"].FormattedValue.ToString();
 
             DetailDataGrid.Rows.RemoveAt(e.RowIndex);
             amount_input.Focus();

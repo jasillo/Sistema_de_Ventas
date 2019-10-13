@@ -29,54 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.InventoryButton = new System.Windows.Forms.Button();
-            this.PurchasesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.SalesButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.backupFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuPrincipalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stadisticsButton = new System.Windows.Forms.Button();
+            this.historicalButton = new System.Windows.Forms.Button();
+            this.SalesButton = new System.Windows.Forms.Button();
+            this.PurchasesButton = new System.Windows.Forms.Button();
+            this.InventoryButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // InventoryButton
-            // 
-            this.InventoryButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("InventoryButton.BackgroundImage")));
-            this.InventoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.InventoryButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.InventoryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InventoryButton.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.InventoryButton.Location = new System.Drawing.Point(25, 57);
-            this.InventoryButton.Name = "InventoryButton";
-            this.InventoryButton.Size = new System.Drawing.Size(183, 140);
-            this.InventoryButton.TabIndex = 0;
-            this.InventoryButton.Text = "Inventario";
-            this.InventoryButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.InventoryButton.UseVisualStyleBackColor = true;
-            this.InventoryButton.Click += new System.EventHandler(this.InventoryButton_Click);
-            // 
-            // PurchasesButton
-            // 
-            this.PurchasesButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PurchasesButton.BackgroundImage")));
-            this.PurchasesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PurchasesButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PurchasesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PurchasesButton.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.PurchasesButton.Location = new System.Drawing.Point(247, 57);
-            this.PurchasesButton.Name = "PurchasesButton";
-            this.PurchasesButton.Size = new System.Drawing.Size(183, 140);
-            this.PurchasesButton.TabIndex = 1;
-            this.PurchasesButton.Text = "Ingreso a Almacen";
-            this.PurchasesButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.PurchasesButton.UseVisualStyleBackColor = true;
-            this.PurchasesButton.Click += new System.EventHandler(this.PurchasesButton_Click);
             // 
             // label1
             // 
@@ -99,52 +66,6 @@
             this.label2.Text = "Aqui se registran los ingresos a almacen, el producto a ingresar debe estar regis" +
     "trado en Inventario";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // SalesButton
-            // 
-            this.SalesButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SalesButton.BackgroundImage")));
-            this.SalesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.SalesButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SalesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SalesButton.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.SalesButton.Location = new System.Drawing.Point(472, 57);
-            this.SalesButton.Name = "SalesButton";
-            this.SalesButton.Size = new System.Drawing.Size(183, 136);
-            this.SalesButton.TabIndex = 4;
-            this.SalesButton.Text = "Ventas";
-            this.SalesButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SalesButton.UseVisualStyleBackColor = true;
-            this.SalesButton.Click += new System.EventHandler(this.SalesButton_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Location = new System.Drawing.Point(699, 57);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 132);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Historial";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.button2.Location = new System.Drawing.Point(928, 57);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(183, 132);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Estadisticas";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -178,10 +99,6 @@
     "e vende menos, las ganancias registradas, etc.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // backupFolderBrowser
-            // 
-            this.backupFolderBrowser.Description = "Seleccione la carpeta donde desea guardar la copia de respado:";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -203,9 +120,89 @@
             // passwordMenuItem
             // 
             this.passwordMenuItem.Name = "passwordMenuItem";
-            this.passwordMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.passwordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwordMenuItem.Text = "Cambiar contraseña";
             this.passwordMenuItem.Click += new System.EventHandler(this.passwordMenuItem_Click);
+            // 
+            // stadisticsButton
+            // 
+            this.stadisticsButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stadisticsButton.BackgroundImage")));
+            this.stadisticsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.stadisticsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stadisticsButton.Enabled = false;
+            this.stadisticsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stadisticsButton.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.stadisticsButton.Location = new System.Drawing.Point(928, 57);
+            this.stadisticsButton.Name = "stadisticsButton";
+            this.stadisticsButton.Size = new System.Drawing.Size(183, 132);
+            this.stadisticsButton.TabIndex = 6;
+            this.stadisticsButton.Text = "Estadisticas";
+            this.stadisticsButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.stadisticsButton.UseVisualStyleBackColor = true;
+            this.stadisticsButton.Click += new System.EventHandler(this.stadisticsButton_Click);
+            // 
+            // historicalButton
+            // 
+            this.historicalButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("historicalButton.BackgroundImage")));
+            this.historicalButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.historicalButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.historicalButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.historicalButton.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.historicalButton.Location = new System.Drawing.Point(699, 57);
+            this.historicalButton.Name = "historicalButton";
+            this.historicalButton.Size = new System.Drawing.Size(183, 132);
+            this.historicalButton.TabIndex = 5;
+            this.historicalButton.Text = "Historial";
+            this.historicalButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.historicalButton.UseVisualStyleBackColor = true;
+            // 
+            // SalesButton
+            // 
+            this.SalesButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SalesButton.BackgroundImage")));
+            this.SalesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SalesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SalesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesButton.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.SalesButton.Location = new System.Drawing.Point(472, 57);
+            this.SalesButton.Name = "SalesButton";
+            this.SalesButton.Size = new System.Drawing.Size(183, 136);
+            this.SalesButton.TabIndex = 4;
+            this.SalesButton.Text = "Ventas";
+            this.SalesButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SalesButton.UseVisualStyleBackColor = true;
+            this.SalesButton.Click += new System.EventHandler(this.SalesButton_Click);
+            // 
+            // PurchasesButton
+            // 
+            this.PurchasesButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PurchasesButton.BackgroundImage")));
+            this.PurchasesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PurchasesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PurchasesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PurchasesButton.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.PurchasesButton.Location = new System.Drawing.Point(247, 57);
+            this.PurchasesButton.Name = "PurchasesButton";
+            this.PurchasesButton.Size = new System.Drawing.Size(183, 140);
+            this.PurchasesButton.TabIndex = 1;
+            this.PurchasesButton.Text = "Ingreso a Almacen";
+            this.PurchasesButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.PurchasesButton.UseVisualStyleBackColor = true;
+            this.PurchasesButton.Click += new System.EventHandler(this.PurchasesButton_Click);
+            // 
+            // InventoryButton
+            // 
+            this.InventoryButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("InventoryButton.BackgroundImage")));
+            this.InventoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.InventoryButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.InventoryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InventoryButton.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.InventoryButton.Location = new System.Drawing.Point(25, 57);
+            this.InventoryButton.Name = "InventoryButton";
+            this.InventoryButton.Size = new System.Drawing.Size(183, 140);
+            this.InventoryButton.TabIndex = 0;
+            this.InventoryButton.Text = "Inventario";
+            this.InventoryButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.InventoryButton.UseVisualStyleBackColor = true;
+            this.InventoryButton.Click += new System.EventHandler(this.InventoryButton_Click);
             // 
             // MainForm
             // 
@@ -216,8 +213,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.stadisticsButton);
+            this.Controls.Add(this.historicalButton);
             this.Controls.Add(this.SalesButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -227,6 +224,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Sistema de Ventas";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -241,12 +239,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button SalesButton;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button historicalButton;
+        private System.Windows.Forms.Button stadisticsButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FolderBrowserDialog backupFolderBrowser;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuPrincipalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordMenuItem;

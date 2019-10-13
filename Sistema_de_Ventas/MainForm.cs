@@ -42,15 +42,16 @@ namespace Sistema_de_Ventas
             userForm.ShowDialog();
         }
 
-        //private void backupMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (backupFolderBrowser.ShowDialog() == DialogResult.OK)
-        //    {
-        //        //if (conection.makeBackup(backupFolderBrowser.SelectedPath))
-        //        //    MessageBox.Show("Se creo con exito el backup", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-        //        //else
-        //        //    MessageBox.Show("Error al crear el backup", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
+        private void stadisticsButton_Click(object sender, EventArgs e)
+        {
+            Form stadisticsForm = new StadisticsForm();
+            stadisticsForm.ShowDialog();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (ConDB.userRole == 1)
+                stadisticsButton.Enabled = true;
+        }
     }
 }

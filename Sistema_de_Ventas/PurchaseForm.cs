@@ -34,10 +34,17 @@ namespace Sistema_de_Ventas
 
         private void formatDataGrid()
         {
+            InventoryDataGrid.Columns["name"].HeaderText = "Nombre del Producto";
+            InventoryDataGrid.Columns["amount"].HeaderText = "Cantidad";
+            InventoryDataGrid.Columns["sale_price"].HeaderText = "precio de venta";
+
             InventoryDataGrid.Columns["id"].Visible = false;
-            InventoryDataGrid.Columns["Nombre del Producto"].Width = 300;
-            InventoryDataGrid.Columns["Cantidad"].Width = 60;
-            InventoryDataGrid.Columns["Stock Minimo"].Width = 60;
+            InventoryDataGrid.Columns["name"].Width = 300;
+            InventoryDataGrid.Columns["amount"].Width = 60;
+            InventoryDataGrid.Columns["sale_price"].Width = 60;
+            InventoryDataGrid.Columns["minimum"].Visible = false;
+            InventoryDataGrid.Columns["bar_code"].Visible = false;
+            InventoryDataGrid.Columns["photo"].Visible = false;
         }
 
         private void clean()
@@ -52,8 +59,8 @@ namespace Sistema_de_Ventas
             if (e.RowIndex == -1)
                 return;
             row_selected_id = InventoryDataGrid.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString();
-            original_amount = InventoryDataGrid.Rows[e.RowIndex].Cells["Cantidad"].FormattedValue.ToString();
-            string name = InventoryDataGrid.Rows[e.RowIndex].Cells["Nombre del Producto"].FormattedValue.ToString();
+            original_amount = InventoryDataGrid.Rows[e.RowIndex].Cells["amount"].FormattedValue.ToString();
+            string name = InventoryDataGrid.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
 
             name_input.Text = name;
         }

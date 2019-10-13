@@ -33,13 +33,19 @@ namespace Sistema_de_Ventas
 
         private void formatDataGrid()
         {
+            InventoryDataGrid.Columns["name"].HeaderText = "Nombre del Producto";
+            InventoryDataGrid.Columns["amount"].HeaderText = "Cantidad";
+            InventoryDataGrid.Columns["sale_price"].HeaderText = "Precio de Venta";
+            InventoryDataGrid.Columns["minimum"].HeaderText = "Stock Minimo";
+            InventoryDataGrid.Columns["bar_code"].HeaderText = "Codigo de Barras";
+
             InventoryDataGrid.Columns["id"].Visible = false;
-            InventoryDataGrid.Columns["Nombre del Producto"].Width = 300;
-            InventoryDataGrid.Columns["Cantidad"].Width = 60;
-            InventoryDataGrid.Columns["Precio de Venta"].Width = 60;
-            InventoryDataGrid.Columns["Stock Minimo"].Width = 60;
-            InventoryDataGrid.Columns["Codigo de Barras"].Visible = false;
-            InventoryDataGrid.Columns["Imagen"].Visible = false;
+            InventoryDataGrid.Columns["name"].Width = 300;
+            InventoryDataGrid.Columns["amount"].Width = 60;
+            InventoryDataGrid.Columns["sale_price"].Width = 60;
+            InventoryDataGrid.Columns["minimum"].Width = 60;
+            InventoryDataGrid.Columns["bar_code"].Visible = false;
+            InventoryDataGrid.Columns["photo"].Visible = false;
         }
 
         private void InventoryDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -47,10 +53,10 @@ namespace Sistema_de_Ventas
             if (e.RowIndex == -1 )
                 return;
             row_selected_id = InventoryDataGrid.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString();
-            string name = InventoryDataGrid.Rows[e.RowIndex].Cells["Nombre del Producto"].FormattedValue.ToString();
-            string amount = InventoryDataGrid.Rows[e.RowIndex].Cells["Cantidad"].FormattedValue.ToString();
-            string price = InventoryDataGrid.Rows[e.RowIndex].Cells["Precio de Venta"].FormattedValue.ToString();
-            string stock = InventoryDataGrid.Rows[e.RowIndex].Cells["Stock Minimo"].FormattedValue.ToString();
+            string name = InventoryDataGrid.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
+            string amount = InventoryDataGrid.Rows[e.RowIndex].Cells["amount"].FormattedValue.ToString();
+            string price = InventoryDataGrid.Rows[e.RowIndex].Cells["sale_price"].FormattedValue.ToString();
+            string stock = InventoryDataGrid.Rows[e.RowIndex].Cells["minimum"].FormattedValue.ToString();
 
             name_input.Text = name;
             amount_input.Text = amount;

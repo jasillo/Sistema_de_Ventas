@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Sistema_de_Ventas
         private static string cadena;
         private static SqlConnection conDB = new SqlConnection();
         public static int userId = -1;
+        public static int userRole = 0;
 
         public static bool openConnection()
         {
@@ -59,11 +61,13 @@ namespace Sistema_de_Ventas
                 userId = getUserID(username, pasword);
                 if (userId == -1)
                     return false;
+                userRole = getUserRole();
                 return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("login", ex.ToString());
                 return false;
             }
         }
@@ -79,59 +83,9 @@ namespace Sistema_de_Ventas
             SqlDataAdapter data = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
             data.Fill(tabla);
-            //tabla.Columns["name"].ColumnName = "Nombre del Producto";
-            //tabla.Columns["amount"].ColumnName = "Cantidad";
-            //tabla.Columns["sale_price"].ColumnName = "Precio de Venta";
-            //tabla.Columns["minimum"].ColumnName = "Stock Minimo";
-            //tabla.Columns["bar_code"].ColumnName = "Codigo de Barras";
-            //tabla.Columns["photo"].ColumnName = "Imagen";
 
             return tabla;
         }
-
-        //public DataTable getProductsForPurchase(string word)
-        //{
-        //    string query;
-        //    if (word == "")
-        //    {
-        //        query = "select id, name, amount, minimum from dbo.product;";
-        //    }
-        //    else
-        //    {
-        //        query = "select id, name, amount, minimum from dbo.product where name like '%" + word + "%';";
-        //    }
-        //    SqlCommand comando = new SqlCommand(query, conDB);
-        //    SqlDataAdapter data = new SqlDataAdapter(comando);
-        //    DataTable tabla = new DataTable();
-        //    data.Fill(tabla);
-        //    tabla.Columns["name"].ColumnName = "Nombre del Producto";
-        //    tabla.Columns["amount"].ColumnName = "Cantidad";
-        //    tabla.Columns["minimum"].ColumnName = "Stock Minimo";
-
-        //    return tabla;
-        //}
-
-        //public DataTable getProductsForSales(string word)
-        //{
-        //    word = Regex.Replace(word, @"[^0-9A-Za-z ]", "", RegexOptions.None);
-        //    String query;
-        //    if (word == "")
-        //    {
-        //        query = "select id, name, sale_price from dbo.product;";
-        //    }
-        //    else
-        //    {
-        //        query = "select id, sale_price, name from dbo.product where name like '%" + word + "%';";
-        //    }
-        //    SqlCommand comando = new SqlCommand(query, conDB);
-        //    SqlDataAdapter data = new SqlDataAdapter(comando);
-        //    DataTable tabla = new DataTable();
-        //    data.Fill(tabla);
-        //    tabla.Columns["name"].ColumnName = "Nombre del Producto";
-        //    tabla.Columns["sale_price"].ColumnName = "Precio";
-
-        //    return tabla;
-        //}
 
         public static bool CreateProduct(string name, string amount, string price, string stock)
         {
@@ -150,6 +104,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("create product", ex.ToString());
                 return false;
             }
         }
@@ -171,6 +126,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("update product", ex.ToString());
                 return false;
             }
             
@@ -188,6 +144,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("delete procuct", ex.ToString());
                 return false;
             }
         }
@@ -204,6 +161,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("Register WareHous Entry", ex.ToString());
                 return false;
             }
         }
@@ -221,6 +179,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("update current stock", ex.ToString());
                 return false;
             }
         }
@@ -236,6 +195,8 @@ namespace Sistema_de_Ventas
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
+                log("make backup", ex.ToString());
                 return false;
             }
             
@@ -254,8 +215,9 @@ namespace Sistema_de_Ventas
                 int res = (int)comando.ExecuteScalar();
                 return res;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log("insert sale", ex.ToString());
                 return -1;
             }
         }
@@ -276,6 +238,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("insert detail sale", ex.ToString());
                 return false;
             }
         }
@@ -297,6 +260,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("reduce inventory", ex.ToString());
                 return false;
             }
         }
@@ -316,11 +280,12 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("valid number", ex.ToString());
                 return "error";
             }
         }
 
-        public static int getUserID(string username, string pwd)
+        private static int getUserID(string username, string pwd)
         {
             try
             {
@@ -332,7 +297,25 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("get user id", ex.ToString());
                 return -1;
+            }
+        }
+
+        private static int getUserRole()
+        {
+            try
+            {
+                string query = "select role from dbo.users where id=" + userId;
+                SqlCommand comando = new SqlCommand(query, conDB);
+                int res = (int)comando.ExecuteScalar();
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get user role", ex.ToString());
+                return 0;
             }
         }
 
@@ -348,9 +331,35 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                log("chenge password", ex.ToString());
                 return false;
             }
         }
 
+        private static void log(string type, string error)
+        {
+            string pathString = @"D:\ErrorLog\log.txt";
+            try
+            {
+                if (!File.Exists(pathString))
+                {
+                    using (StreamWriter sw = File.CreateText(pathString))
+                    {
+                        sw.WriteLine("Log de Errores del sistema");
+                    }
+                }
+                using (StreamWriter sw = File.AppendText(pathString))
+                {
+                    sw.WriteLine(type);
+                    sw.WriteLine(error);
+                    sw.WriteLine("");
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
+        }
     }
 }
