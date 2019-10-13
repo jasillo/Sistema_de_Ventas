@@ -113,7 +113,7 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                log("create product", ex.ToString());
+                log("create product " + name, ex.ToString());
                 return false;
             }
         }

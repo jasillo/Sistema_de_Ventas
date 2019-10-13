@@ -56,7 +56,7 @@
             // passwordMenuItem
             // 
             this.passwordMenuItem.Name = "passwordMenuItem";
-            this.passwordMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.passwordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwordMenuItem.Text = "Copia de Seguridad";
             this.passwordMenuItem.Click += new System.EventHandler(this.passwordMenuItem_Click);
             // 

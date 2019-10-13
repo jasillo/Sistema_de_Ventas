@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,5 +33,20 @@ namespace Sistema_de_Ventas
         {
             ConDB.mainForm.Show();
         }
+
+        //private void importarCsvToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    using (var reader = new StreamReader(@"D:\inventario.csv"))
+        //    {
+        //        reader.ReadLine();
+        //        while (!reader.EndOfStream)
+        //        {
+        //            var line = reader.ReadLine();
+        //            var values = line.Split(',');
+        //            ConDB.CreateProduct(values[0],values[1],values[2], "0");                    
+        //        }
+        //    }
+        //    MessageBox.Show("terminado");
+        //}
     }
 }
