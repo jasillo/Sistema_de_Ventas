@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema_de_Ventas", "Sistema_de_Ventas\Sistema_de_Ventas.csproj", "{6C714663-2E7C-4BBC-8DDB-C5A3F91FE7F7}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "installer_sistema_ventas", "installer_sistema_ventas\installer_sistema_ventas.vdproj", "{64348CC3-6BA6-43E6-8E7A-46A470126B34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{6C714663-2E7C-4BBC-8DDB-C5A3F91FE7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C714663-2E7C-4BBC-8DDB-C5A3F91FE7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C714663-2E7C-4BBC-8DDB-C5A3F91FE7F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64348CC3-6BA6-43E6-8E7A-46A470126B34}.Debug|Any CPU.ActiveCfg = Debug
+		{64348CC3-6BA6-43E6-8E7A-46A470126B34}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
