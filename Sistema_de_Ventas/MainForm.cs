@@ -56,7 +56,15 @@ namespace Sistema_de_Ventas
         private void MainForm_Shown(object sender, EventArgs e)
         {
             if (ConDB.userRole == 1)
+            {
                 stadisticsButton.Enabled = true;
+                InventoryButton.Enabled = true;
+            } else
+            {
+                stadisticsButton.Enabled = false;
+                InventoryButton.Enabled = false;
+            }
+                
         }
     }
 }

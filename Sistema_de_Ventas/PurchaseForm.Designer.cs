@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseForm));
             this.InventoryDataGrid = new System.Windows.Forms.DataGridView();
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -121,7 +122,7 @@
             this.price_input.Name = "price_input";
             this.price_input.Size = new System.Drawing.Size(110, 20);
             this.price_input.TabIndex = 26;
-            this.price_input.Text = "0,0";
+            this.price_input.Text = "0.0";
             // 
             // name_input
             // 
@@ -168,7 +169,7 @@
             this.amount_input.Name = "amount_input";
             this.amount_input.Size = new System.Drawing.Size(110, 20);
             this.amount_input.TabIndex = 25;
-            this.amount_input.Text = "0,0";
+            this.amount_input.Text = "0";
             // 
             // PurchaseForm
             // 
@@ -186,6 +187,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.InventoryDataGrid);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PurchaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingresos a Almacen";

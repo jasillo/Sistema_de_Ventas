@@ -103,7 +103,7 @@ namespace Sistema_de_Ventas
                 return;
             }
 
-            if (ConDB.CreateProduct(name, amount, price, stock))
+            if (ConDB.CreateProduct(name, amount, price, stock, barcode_input.Text))
             {
                 MessageBox.Show("Producto creado exitosamente", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }

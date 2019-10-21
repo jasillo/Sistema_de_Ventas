@@ -85,11 +85,7 @@ namespace Sistema_de_Ventas
 
             if (ConDB.RegisterWareHouseEntry(row_selected_id, name_input.Text, price, amount))
             {
-
-                if (ConDB.updateCurrentStock(row_selected_id, original_amount, amount))
-                    MessageBox.Show("Entrada en almacen exitosa", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                else
-                    MessageBox.Show("Se hizo el registro de la entrada, pero no se pudo actualizar el stock actual", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Entrada en almacen exitosa", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {

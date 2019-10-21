@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.pwd_input = new System.Windows.Forms.TextBox();
             this.username_input = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
             this.conection_label = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // pwd_input
@@ -90,18 +92,29 @@
             this.conection_label.Text = "Solucionar Problemas de Coneccion";
             this.conection_label.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.conection_label_LinkClicked);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(328, 176);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "version 1.1";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(399, 198);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.conection_label);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.pwd_input);
             this.Controls.Add(this.username_input);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -120,5 +133,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.LinkLabel conection_label;
+        private System.Windows.Forms.Label label3;
     }
 }

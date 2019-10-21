@@ -39,12 +39,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.name_input = new System.Windows.Forms.TextBox();
             this.amount_input = new System.Windows.Forms.TextBox();
             this.price_input = new System.Windows.Forms.TextBox();
             this.stock_input = new System.Windows.Forms.TextBox();
-            this.photo_input = new System.Windows.Forms.TextBox();
             this.InsertButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
@@ -152,16 +150,6 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Stock Minimo:";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(560, 220);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(36, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Foto:";
-            // 
             // name_input
             // 
             this.name_input.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
@@ -174,7 +162,6 @@
             // 
             this.amount_input.Location = new System.Drawing.Point(706, 84);
             this.amount_input.Name = "amount_input";
-            this.amount_input.ReadOnly = true;
             this.amount_input.Size = new System.Drawing.Size(180, 20);
             this.amount_input.TabIndex = 9;
             this.amount_input.Text = "0,0";
@@ -194,15 +181,6 @@
             this.stock_input.Size = new System.Drawing.Size(180, 20);
             this.stock_input.TabIndex = 11;
             this.stock_input.Text = "0,0";
-            // 
-            // photo_input
-            // 
-            this.photo_input.Enabled = false;
-            this.photo_input.Location = new System.Drawing.Point(706, 217);
-            this.photo_input.Name = "photo_input";
-            this.photo_input.ReadOnly = true;
-            this.photo_input.Size = new System.Drawing.Size(180, 20);
-            this.photo_input.TabIndex = 12;
             // 
             // InsertButton
             // 
@@ -272,7 +250,6 @@
             this.barcode_input.Enabled = false;
             this.barcode_input.Location = new System.Drawing.Point(706, 183);
             this.barcode_input.Name = "barcode_input";
-            this.barcode_input.ReadOnly = true;
             this.barcode_input.Size = new System.Drawing.Size(180, 20);
             this.barcode_input.TabIndex = 18;
             // 
@@ -281,19 +258,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1078, 450);
+            this.ClientSize = new System.Drawing.Size(1078, 457);
             this.Controls.Add(this.barcode_input);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.CleanButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.InsertButton);
-            this.Controls.Add(this.photo_input);
             this.Controls.Add(this.stock_input);
             this.Controls.Add(this.price_input);
             this.Controls.Add(this.amount_input);
             this.Controls.Add(this.name_input);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -301,6 +276,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.InventoryDataGrid);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InventoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventario de Productos";
@@ -320,12 +296,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox name_input;
         private System.Windows.Forms.TextBox amount_input;
         private System.Windows.Forms.TextBox price_input;
         private System.Windows.Forms.TextBox stock_input;
-        private System.Windows.Forms.TextBox photo_input;
         private System.Windows.Forms.Button InsertButton;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button DeleteButton;

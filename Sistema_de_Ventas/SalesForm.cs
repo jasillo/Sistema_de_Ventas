@@ -80,7 +80,7 @@ namespace Sistema_de_Ventas
                 return;
             }
             row_selected_id = InventoryDataGrid.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString();
-            string price = InventoryDataGrid.Rows[e.RowIndex].Cells["price"].FormattedValue.ToString();
+            string price = InventoryDataGrid.Rows[e.RowIndex].Cells["sale_price"].FormattedValue.ToString();
             string name = InventoryDataGrid.Rows[e.RowIndex].Cells["name"].FormattedValue.ToString();
 
             name_input.Text = name;
@@ -170,6 +170,7 @@ namespace Sistema_de_Ventas
             if (confirmResult == DialogResult.Yes)
             {
                 int id_sale = ConDB.insertSale(detailsDataTable.Rows.Count, totalSale_input.Text);
+                Console.WriteLine(id_sale.ToString());
                 if (id_sale == -1)
                 {
                     MessageBox.Show("Error al Procesar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -207,6 +208,21 @@ namespace Sistema_de_Ventas
         private void SalesForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             ConDB.mainForm.Show();
+        }
+
+        private void barcode_input_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                List<string> res = ConDB.getProductByBarcode(barcode_input.Text);
+                if (res.Count == 0)
+                    return;
+                row_selected_id = res[0];
+                filter_word = res[1];
+                filterTextBox.Text = ConDB.validString(res[1]);
+                name_input.Text = res[1];
+                price_input.Text = res[2];
+            }
         }
     }
 }

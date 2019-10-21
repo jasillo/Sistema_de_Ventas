@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Sistema_de_Ventas
 {
@@ -31,7 +32,7 @@ namespace Sistema_de_Ventas
                 login();
             } else
             {
-                if (ConDB.openConnection())
+                if (!ConDB.openConnection())
                 {
                     MessageBox.Show("No se pudo conectar a la base de datos, haga click en 'solucionar problemas de coneccion' y siga los pasos",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -47,6 +48,14 @@ namespace Sistema_de_Ventas
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            using (StreamReader file = new StreamReader(@"D:\ErrorLog\coneccion.txt"))
+            {
+                string temp = file.ReadLine();
+                ConDB.cadena = temp;
+                Console.WriteLine(ConDB.cadena);
+                file.Close();
+            }
+
             if (!ConDB.openConnection())
             {
                 MessageBox.Show("No se pudo conectar a la base de datos, haga click en 'solucionar problemas de coneccion' y siga los pasos",

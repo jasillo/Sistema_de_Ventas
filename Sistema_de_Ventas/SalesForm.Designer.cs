@@ -52,6 +52,10 @@
             // 
             // InventoryDataGrid
             // 
+            this.InventoryDataGrid.AllowUserToAddRows = false;
+            this.InventoryDataGrid.AllowUserToDeleteRows = false;
+            this.InventoryDataGrid.AllowUserToResizeColumns = false;
+            this.InventoryDataGrid.AllowUserToResizeRows = false;
             this.InventoryDataGrid.BackgroundColor = System.Drawing.Color.White;
             this.InventoryDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.InventoryDataGrid.Location = new System.Drawing.Point(12, 66);
@@ -83,29 +87,32 @@
             // 
             // price_input
             // 
+            this.price_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.price_input.Location = new System.Drawing.Point(588, 89);
             this.price_input.Name = "price_input";
             this.price_input.ReadOnly = true;
-            this.price_input.Size = new System.Drawing.Size(194, 20);
+            this.price_input.Size = new System.Drawing.Size(194, 23);
             this.price_input.TabIndex = 32;
             this.price_input.Text = "0,0";
             // 
             // amount_input
             // 
+            this.amount_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.amount_input.Location = new System.Drawing.Point(588, 117);
             this.amount_input.Name = "amount_input";
-            this.amount_input.Size = new System.Drawing.Size(194, 20);
+            this.amount_input.Size = new System.Drawing.Size(194, 23);
             this.amount_input.TabIndex = 31;
-            this.amount_input.Text = "1,0";
+            this.amount_input.Text = "1";
             this.amount_input.KeyUp += new System.Windows.Forms.KeyEventHandler(this.amount_input_KeyUp);
             // 
             // name_input
             // 
             this.name_input.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.name_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name_input.Location = new System.Drawing.Point(588, 60);
             this.name_input.Name = "name_input";
             this.name_input.ReadOnly = true;
-            this.name_input.Size = new System.Drawing.Size(400, 20);
+            this.name_input.Size = new System.Drawing.Size(400, 23);
             this.name_input.TabIndex = 30;
             // 
             // label4
@@ -141,11 +148,12 @@
             // barcode_input
             // 
             this.barcode_input.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.barcode_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barcode_input.Location = new System.Drawing.Point(588, 31);
             this.barcode_input.Name = "barcode_input";
-            this.barcode_input.ReadOnly = true;
-            this.barcode_input.Size = new System.Drawing.Size(194, 20);
+            this.barcode_input.Size = new System.Drawing.Size(194, 23);
             this.barcode_input.TabIndex = 34;
+            this.barcode_input.KeyDown += new System.Windows.Forms.KeyEventHandler(this.barcode_input_KeyDown);
             // 
             // label5
             // 
@@ -188,7 +196,7 @@
             // label8
             // 
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label8.Location = new System.Drawing.Point(455, 142);
+            this.label8.Location = new System.Drawing.Point(455, 152);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(532, 2);
             this.label8.TabIndex = 40;
@@ -248,6 +256,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.InventoryDataGrid);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Formulario de Ventas";
