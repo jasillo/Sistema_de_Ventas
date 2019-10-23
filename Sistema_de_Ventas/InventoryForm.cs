@@ -153,7 +153,7 @@ namespace Sistema_de_Ventas
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Esta seguro que desea borra este producto? esto conlleva a perdida de información", "Confirmar Borrado!!", MessageBoxButtons.YesNo);
+            var confirmResult = MessageBox.Show("Esta seguro que desea borra este producto? esto conlleva a perdida de información", "Confirmar Borrado!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
                 if (ConDB.DeleteProduct(row_selected_id))
