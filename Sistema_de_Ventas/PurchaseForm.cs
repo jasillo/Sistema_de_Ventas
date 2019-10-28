@@ -108,5 +108,21 @@ namespace Sistema_de_Ventas
         {
             ConDB.mainForm.Show();
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                List<string> res = ConDB.getProductByBarcode(barcode_input.Text);
+                if (res.Count == 0)
+                    return;
+                row_selected_id = res[0];
+                filter_word = res[1];
+                filterTextBox.Text = ConDB.validString(res[1]);
+                name_input.Text = res[1];
+                amount_input.Text = "0";
+                price_input.Text = "0";
+            }
+        }
     }
 }
