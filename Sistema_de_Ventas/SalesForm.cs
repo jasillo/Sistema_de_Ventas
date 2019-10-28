@@ -170,7 +170,6 @@ namespace Sistema_de_Ventas
             if (confirmResult == DialogResult.Yes)
             {
                 int id_sale = ConDB.insertSale(detailsDataTable.Rows.Count, totalSale_input.Text);
-                Console.WriteLine(id_sale.ToString());
                 if (id_sale == -1)
                 {
                     MessageBox.Show("Error al Procesar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -181,9 +180,6 @@ namespace Sistema_de_Ventas
                     bool res = ConDB.insertDetailSale(id_sale, row["id"].ToString(), row["name"].ToString(), row["price"].ToString(), row["amount"].ToString(), row["total"].ToString());
                     if (!res)
                         MessageBox.Show("no se pudo insertar " + row["name"].ToString());
-                    bool res2 = ConDB.reduceInventory(row["id"].ToString(), row["amount"].ToString());
-                    if (!res2)
-                        MessageBox.Show("no se pudo reducir " + row["name"].ToString());
                 }
                 detailsDataTable.Clear();
                 totalSale_input.Text = "00,00";

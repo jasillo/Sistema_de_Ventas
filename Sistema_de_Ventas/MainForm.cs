@@ -66,5 +66,12 @@ namespace Sistema_de_Ventas
             }
                 
         }
+
+        private void historicalButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form historicForm = new Historic();
+            historicForm.ShowDialog();
+        }
     }
 }

@@ -63,6 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConDB.cs" />
+    <Compile Include="Historic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historic.Designer.cs">
+      <DependentUpon>Historic.cs</DependentUpon>
+    </Compile>
     <Compile Include="initBDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     <Compile Include="UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Historic.resx">
+      <DependentUpon>Historic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="initBDForm.resx">
       <DependentUpon>initBDForm.cs</DependentUpon>
     </EmbeddedResource>

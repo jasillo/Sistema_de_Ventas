@@ -73,7 +73,6 @@ namespace Sistema_de_Ventas
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                log("login", ex.ToString(), "");
                 return false;
             }
         }
@@ -102,18 +101,28 @@ namespace Sistema_de_Ventas
 
         public static bool CreateProduct(string name, string amount, string price, string stock, string barcode)
         {
-            string query = "";
+            string query = "procedure";
             try
             {
-                query = "select count(1) from dbo.product where name='" + name + "'";
-                SqlCommand comando = new SqlCommand(query, conDB);
-                int res = (int)comando.ExecuteScalar();
-                if (res > 0)
+                string line = "nombre: " + name + " ,cantidad:" + amount + " ,precio:" + price + " ,stock:" + stock + " ,codigo:" + barcode;
+                SqlCommand cmd = new SqlCommand("dbo.create_product", conDB);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.Parameters.AddWithValue("@stock", stock);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@barcode", barcode);
+                cmd.Parameters.AddWithValue("@userID", userId);
+                cmd.Parameters.AddWithValue("@line", line);
+                SqlParameter returnValue = new SqlParameter("@res", DbType.Int32);
+                returnValue.Direction = System.Data.ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(returnValue);
+                cmd.ExecuteNonQuery();
+                int res = (int)cmd.Parameters["@res"].Value;
+                if (res == 1)
+                    return true;
+                else
                     return false;
-                query = "insert into dbo.product values ('"+ name +"'," + amount + "," + stock + "," + price + "," + barcode + " ,NULL)";
-                SqlCommand comando2 = new SqlCommand(query, conDB);
-                comando2.ExecuteNonQuery();
-                return true;
             }
             catch (Exception ex)
             {
@@ -123,20 +132,31 @@ namespace Sistema_de_Ventas
             }
         }
 
-        public static bool UpdateProduct(string id, string name, string amount, string price, string stock)
+        public static bool UpdateProduct(string id, string name, string amount, string price, string stock, string barcode)
         {
-            string query = "";
+            string query = "procedure";
             try
             {
-                query = "select count(1) from dbo.product where name='" + name + "' and id!=" + id;
-                SqlCommand comando = new SqlCommand(query, conDB);
-                int res = (int)comando.ExecuteScalar();
-                if (res > 0)
+                string line = "nombre: " + name + " ,cantidad:" + amount + " ,precio:" + price + " ,stock:" + stock + " ,codigo:" + barcode;
+                SqlCommand cmd = new SqlCommand("dbo.update_product", conDB);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.Parameters.AddWithValue("@stock", stock);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@barcode", barcode);
+                cmd.Parameters.AddWithValue("@userID", userId);
+                cmd.Parameters.AddWithValue("@line", line);
+                SqlParameter returnValue = new SqlParameter("@res", DbType.Int32);
+                returnValue.Direction = System.Data.ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(returnValue);
+                cmd.ExecuteNonQuery();
+                int res = (int)cmd.Parameters["@res"].Value;
+                if (res == 1)
+                    return true;
+                else
                     return false;
-                query = "update dbo.product set name='" + name + "', amount=" + amount + ", sale_price=" + price + ", minimum=" + stock + " where id=" + id + ";";
-                SqlCommand comando2 = new SqlCommand(query, conDB);
-                comando2.ExecuteNonQuery();
-                return true;
             }
             catch (Exception ex)
             {
@@ -147,15 +167,25 @@ namespace Sistema_de_Ventas
             
         }
 
-        public static bool DeleteProduct(string id)
+        public static bool DeleteProduct(string id, string name)
         {
-            string query = "";
+            string query = "procedure";
             try
             {
-                query = "DELETE FROM dbo.product WHERE id=" + id;
-                SqlCommand comando = new SqlCommand(query, conDB);
-                comando.ExecuteNonQuery();
-                return true;
+                SqlCommand cmd = new SqlCommand("dbo.delete_product", conDB);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@userID", userId);
+                cmd.Parameters.AddWithValue("@line", "nombre:" + name);
+                SqlParameter returnValue = new SqlParameter("@res", DbType.Int32);
+                returnValue.Direction = System.Data.ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(returnValue);
+                cmd.ExecuteNonQuery();
+                int res = (int)cmd.Parameters["@res"].Value;
+                if (res == 1)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception ex)
             {
@@ -238,16 +268,24 @@ namespace Sistema_de_Ventas
 
         public static bool insertDetailSale(int id_sale, string id_product, string product_name, string price, string amount, string total)
         {
-            string query = "";
+            string query = "procedure";
             try
             {
                 string id_s = id_sale.ToString();
                 string p = price.Replace(",", ".");
                 string a = amount.Replace(",", ".");
                 string t = total.Replace(",", ".");
-                query = "insert into dbo.detail values (" + id_s + "," + id_product + ",'" + product_name + "'," + p + "," + a + "," + t + ")";
-                SqlCommand comando = new SqlCommand(query, conDB);
-                comando.ExecuteNonQuery();
+
+                SqlCommand cmd = new SqlCommand("dbo.create_detail", conDB);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idSale", id_s);
+                cmd.Parameters.AddWithValue("@idProduct", id_product);
+                cmd.Parameters.AddWithValue("@name", product_name);
+                cmd.Parameters.AddWithValue("@price", p);
+                cmd.Parameters.AddWithValue("@amount", a);
+                cmd.Parameters.AddWithValue("@total", t);
+                cmd.ExecuteNonQuery();
+
                 return true;
             }
             catch (Exception ex)
@@ -257,30 +295,7 @@ namespace Sistema_de_Ventas
                 return false;
             }
         }
-
-        public static bool reduceInventory(string id_product, string amount)
-        {
-            string query = "";
-            try
-            {
-                query = "select amount from dbo.product where id=" + id_product;
-                SqlCommand comando = new SqlCommand(query, conDB);
-                float current = float.Parse(comando.ExecuteScalar().ToString());
-                float a = float.Parse(amount.Replace(".", ","));
-                string new_amount = (current - a).ToString().Replace(",", ".");
-                query = "update dbo.product set amount=" + new_amount + " where id=" + id_product;
-                SqlCommand comando2 = new SqlCommand(query, conDB);
-                comando2.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                log("reduce inventory", ex.ToString(), query);
-                return false;
-            }
-        }
-
+        
         public static string validString(string word)
         {
             return Regex.Replace(word.Trim().ToLower(), @"[^0-9a-zñ., ]", "", RegexOptions.None);
@@ -410,6 +425,122 @@ namespace Sistema_de_Ventas
                 Console.WriteLine(ex.ToString());
                 log("get by code bar", ex.ToString(), query);
                 return res;
+            }
+        }
+
+        public static DataTable getListOfSales(string start, string end)
+        {
+            string query = "";
+            try
+            {
+                query = "select * from dbo.sale where date>='" + start +" 00:00:00' and date<='" + end + " 23:59:59';";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get list of sales", ex.ToString(), query);
+                return new DataTable();
+            }
+        }
+
+        public static DataTable getListOfDetails(string idSale)
+        {
+            string query = "";
+            try
+            {
+                query = "select * from dbo.detail where id_sale=" + idSale + ";";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get list od details", ex.ToString(), query);
+                return new DataTable();
+            }
+        }
+
+        public static float getTotalSales(string start, string end)
+        {
+            string query = "";
+            try
+            {
+                query = "select sum(total) from dbo.sale where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                float res = float.Parse(comando.ExecuteScalar().ToString().Replace('.',','));
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get total sales", ex.ToString(), query);
+                return 0.0f;
+            }
+        }
+
+        public static DataTable getListOfEntries(string start, string end)
+        {
+            string query = "";
+            try
+            {
+                query = "select * from dbo.entries where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get list entries", ex.ToString(), query);
+                return new DataTable();
+            }
+        }
+
+        public static DataTable getHistoricalProducts(string start, string end)
+        {
+            string query = "";
+            try
+            {
+                query = "select * from dbo.historical where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get historical products", ex.ToString(), query);
+                return new DataTable();
+            }
+        }
+
+        public static float getTotalEntries(string start, string end)
+        {
+            string query = "";
+            try
+            {
+                query = "select sum(total) from dbo.entries where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                float res = float.Parse(comando.ExecuteScalar().ToString().Replace('.', ','));
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get total entries", ex.ToString(), query);
+                return 0.0f;
             }
         }
     }

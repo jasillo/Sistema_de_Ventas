@@ -65,8 +65,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(213, 115);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Aqui se registran los ingresos a almacen, el producto a ingresar debe estar regis" +
-    "trado en Inventario";
+            this.label2.Text = "Aqui se registran los ingresos a almacen, como tambien devoluciones, el producto " +
+    "debe estar registrado previamente en el Inventario";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label3
@@ -161,6 +161,7 @@
             this.historicalButton.Text = "Historial";
             this.historicalButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.historicalButton.UseVisualStyleBackColor = true;
+            this.historicalButton.Click += new System.EventHandler(this.historicalButton_Click);
             // 
             // SalesButton
             // 
@@ -215,7 +216,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1140, 382);
+            this.ClientSize = new System.Drawing.Size(1140, 338);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

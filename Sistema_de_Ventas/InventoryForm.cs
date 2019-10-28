@@ -79,6 +79,7 @@ namespace Sistema_de_Ventas
             amount_input.Text = "0,0";
             price_input.Text = "0,0";
             stock_input.Text = "0,0";
+            barcode_input.Text = "";
             SaveButton.Visible = false;
             DeleteButton.Visible = false;
             InsertButton.Visible = true;
@@ -136,7 +137,7 @@ namespace Sistema_de_Ventas
                 MessageBox.Show("El stock no es valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (ConDB.UpdateProduct(row_selected_id, name, amount, price, stock))
+            if (ConDB.UpdateProduct(row_selected_id, name, amount, price, stock, barcode_input.Text))
             {
                 MessageBox.Show("Producto modificado exitosamente", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
@@ -156,7 +157,7 @@ namespace Sistema_de_Ventas
             var confirmResult = MessageBox.Show("Esta seguro que desea borra este producto? esto conlleva a perdida de información", "Confirmar Borrado!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                if (ConDB.DeleteProduct(row_selected_id))
+                if (ConDB.DeleteProduct(row_selected_id, name_input.Text))
                 {
                     MessageBox.Show("El Producto fue eliminado exitosamente", "Exito!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }

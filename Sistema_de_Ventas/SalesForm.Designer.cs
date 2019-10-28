@@ -46,8 +46,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.totalSale_input = new System.Windows.Forms.TextBox();
             this.processButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetailDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // InventoryDataGrid
@@ -58,12 +61,12 @@
             this.InventoryDataGrid.AllowUserToResizeRows = false;
             this.InventoryDataGrid.BackgroundColor = System.Drawing.Color.White;
             this.InventoryDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.InventoryDataGrid.Location = new System.Drawing.Point(12, 66);
+            this.InventoryDataGrid.Location = new System.Drawing.Point(12, 98);
             this.InventoryDataGrid.MultiSelect = false;
             this.InventoryDataGrid.Name = "InventoryDataGrid";
             this.InventoryDataGrid.ReadOnly = true;
             this.InventoryDataGrid.RowHeadersVisible = false;
-            this.InventoryDataGrid.Size = new System.Drawing.Size(387, 497);
+            this.InventoryDataGrid.Size = new System.Drawing.Size(387, 465);
             this.InventoryDataGrid.TabIndex = 4;
             this.InventoryDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InventoryDataGrid_CellClick);
             // 
@@ -71,7 +74,8 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 24);
+            this.label1.ForeColor = System.Drawing.Color.Tomato;
+            this.label1.Location = new System.Drawing.Point(104, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 13);
             this.label1.TabIndex = 7;
@@ -79,9 +83,9 @@
             // 
             // filterTextBox
             // 
-            this.filterTextBox.Location = new System.Drawing.Point(12, 40);
+            this.filterTextBox.Location = new System.Drawing.Point(104, 72);
             this.filterTextBox.Name = "filterTextBox";
-            this.filterTextBox.Size = new System.Drawing.Size(387, 20);
+            this.filterTextBox.Size = new System.Drawing.Size(295, 20);
             this.filterTextBox.TabIndex = 6;
             this.filterTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.filterTextBox_KeyDown);
             // 
@@ -119,6 +123,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Tomato;
             this.label4.Location = new System.Drawing.Point(452, 92);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
@@ -129,6 +134,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Tomato;
             this.label3.Location = new System.Drawing.Point(452, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
@@ -139,6 +145,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Tomato;
             this.label2.Location = new System.Drawing.Point(452, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 13);
@@ -159,6 +166,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Tomato;
             this.label5.Location = new System.Drawing.Point(452, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 13);
@@ -169,6 +177,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Tomato;
             this.label7.Location = new System.Drawing.Point(451, 166);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(149, 20);
@@ -189,7 +198,7 @@
             this.DetailDataGrid.ReadOnly = true;
             this.DetailDataGrid.RowHeadersVisible = false;
             this.DetailDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DetailDataGrid.Size = new System.Drawing.Size(533, 321);
+            this.DetailDataGrid.Size = new System.Drawing.Size(533, 269);
             this.DetailDataGrid.TabIndex = 39;
             this.DetailDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailDataGrid_CellClick);
             // 
@@ -205,7 +214,8 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(806, 520);
+            this.label9.ForeColor = System.Drawing.Color.Tomato;
+            this.label9.Location = new System.Drawing.Point(806, 468);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(54, 20);
             this.label9.TabIndex = 41;
@@ -214,7 +224,7 @@
             // totalSale_input
             // 
             this.totalSale_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalSale_input.Location = new System.Drawing.Point(866, 517);
+            this.totalSale_input.Location = new System.Drawing.Point(866, 465);
             this.totalSale_input.Name = "totalSale_input";
             this.totalSale_input.ReadOnly = true;
             this.totalSale_input.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -224,21 +234,47 @@
             // 
             // processButton
             // 
-            this.processButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("processButton.BackgroundImage")));
+            this.processButton.BackColor = System.Drawing.Color.ForestGreen;
             this.processButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.processButton.Location = new System.Drawing.Point(1013, 443);
+            this.processButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.processButton.ForeColor = System.Drawing.Color.White;
+            this.processButton.Location = new System.Drawing.Point(810, 515);
             this.processButton.Name = "processButton";
-            this.processButton.Size = new System.Drawing.Size(100, 100);
+            this.processButton.Size = new System.Drawing.Size(177, 48);
             this.processButton.TabIndex = 43;
-            this.processButton.UseVisualStyleBackColor = true;
+            this.processButton.Text = "Procesar Venta";
+            this.processButton.UseVisualStyleBackColor = false;
             this.processButton.Click += new System.EventHandler(this.processButton_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Tomato;
+            this.label6.Location = new System.Drawing.Point(98, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(105, 31);
+            this.label6.TabIndex = 45;
+            this.label6.Text = "Ventas";
             // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1138, 575);
+            this.ClientSize = new System.Drawing.Size(1026, 575);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.processButton);
             this.Controls.Add(this.totalSale_input);
             this.Controls.Add(this.label9);
@@ -256,6 +292,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.InventoryDataGrid);
+            this.ForeColor = System.Drawing.Color.Tomato;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -264,6 +301,7 @@
             this.Shown += new System.EventHandler(this.SalesForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetailDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,5 +326,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox totalSale_input;
         private System.Windows.Forms.Button processButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label6;
     }
 }
