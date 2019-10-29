@@ -75,7 +75,7 @@ namespace Sistema_de_Ventas
 
         private void InventoryDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || e.RowIndex >= InventoryDataGrid.RowCount - 1)
+            if (e.RowIndex == -1)
             {
                 return;
             }
