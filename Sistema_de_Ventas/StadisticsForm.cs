@@ -48,5 +48,17 @@ namespace Sistema_de_Ventas
             }
             MessageBox.Show("terminado");
         }
+
+        private void StadisticsForm_Load(object sender, EventArgs e)
+        {
+            MainDataGrid.DataSource = ConDB.getStatistic();
+        }
+
+        private void MainDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            detailDataGrid.DataSource = ConDB.getDetailStatistic(MainDataGrid.Rows[e.RowIndex].Cells["id"].FormattedValue.ToString());
+        }
     }
 }

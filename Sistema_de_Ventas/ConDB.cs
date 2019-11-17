@@ -433,7 +433,7 @@ namespace Sistema_de_Ventas
             string query = "";
             try
             {
-                query = "select * from dbo.sale where date>='" + start +" 00:00:00' and date<='" + end + " 23:59:59';";
+                query = "select * from dbo.sale where date>='" + start +"T00:00:00' and date<='" + end + "T23:59:59';";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 SqlDataAdapter data = new SqlDataAdapter(comando);
                 DataTable tabla = new DataTable();
@@ -473,7 +473,7 @@ namespace Sistema_de_Ventas
             string query = "";
             try
             {
-                query = "select sum(total) from dbo.sale where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                query = "select sum(total) from dbo.sale where date>='" + start + "T00:00:00' and date<='" + end + "T23:59:59';";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 float res = float.Parse(comando.ExecuteScalar().ToString().Replace('.',','));
                 return res;
@@ -491,7 +491,7 @@ namespace Sistema_de_Ventas
             string query = "";
             try
             {
-                query = "select * from dbo.entries where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                query = "select * from dbo.entries where date>='" + start + "T00:00:00' and date<='" + end + "T23:59:59';";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 SqlDataAdapter data = new SqlDataAdapter(comando);
                 DataTable tabla = new DataTable();
@@ -511,7 +511,7 @@ namespace Sistema_de_Ventas
             string query = "";
             try
             {
-                query = "select * from dbo.historical where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                query = "select * from dbo.historical where date>='" + start + "T00:00:00' and date<='" + end + "T23:59:59';";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 SqlDataAdapter data = new SqlDataAdapter(comando);
                 DataTable tabla = new DataTable();
@@ -531,7 +531,7 @@ namespace Sistema_de_Ventas
             string query = "";
             try
             {
-                query = "select sum(total) from dbo.entries where date>='" + start + " 00:00:00' and date<='" + end + " 23:59:59';";
+                query = "select sum(total) from dbo.entries where date>='" + start + "T00:00:00' and date<='" + end + "T23:59:59';";
                 SqlCommand comando = new SqlCommand(query, conDB);
                 float res = float.Parse(comando.ExecuteScalar().ToString().Replace('.', ','));
                 return res;
@@ -541,6 +541,50 @@ namespace Sistema_de_Ventas
                 Console.WriteLine(ex.ToString());
                 log("get total entries", ex.ToString(), query);
                 return 0.0f;
+            }
+        }
+
+        public static DataTable getStatistic()
+        {
+            string query = "";
+            try
+            {
+                query = "select p.id as id, p.name, ISNULL(sum(d.amount), 0)as amount, ISNULL(sum(d.total), 0) as total " +
+                        "from dbo.product p left join dbo.detail d on p.id = d.id_product " +
+                        "group by p.id, p.name;";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get stadistics", ex.ToString(), query);
+                return new DataTable();
+            }
+        }
+
+        public static DataTable getDetailStatistic(string id)
+        {
+            string query = "";
+            try
+            {
+                query = "select d.product_name, d.amount, d.total, s.date " +
+                        "from dbo.detail d, dbo.sale s " +
+                        "where d.id_product = " + id + " and d.id_sale = s.id";
+                SqlCommand comando = new SqlCommand(query, conDB);
+                SqlDataAdapter data = new SqlDataAdapter(comando);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                log("get detail stadistics", ex.ToString(), query);
+                return new DataTable();
             }
         }
     }
